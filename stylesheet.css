@@ -1,0 +1,193 @@
+:root {
+  --blue: #0a142d;
+  --orange: #ff7e00;
+  --white: #ffffff;
+  --big-headline: 24px;
+  --beer-headline: 18px;
+  --text: 14px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: helvetica, sans-serif;
+  font-size: var(--text);
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+body {
+  background-image: url(static/29440531895_09f8f7f78c_k.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+header {
+  background-color: var(--blue);
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid gray;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.color-theme .dark,
+.color-theme .light {
+  height: 18px;
+  width: auto;
+}
+.switch {
+  display: inline-block;
+  height: 20px;
+  position: relative;
+  width: 35px;
+  margin-top: 15px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  border-radius: 25px;
+  transition: 0.4s;
+  transition-delay: 0s;
+}
+
+.slider:before {
+  position: absolute;
+  background-color: var(--orange);
+  height: 12px;
+  width: 12px;
+  border-radius: 25px;
+  content: "";
+  bottom: 4px;
+  left: 4px;
+  transition: 0.4s;
+}
+input:checked + .slider:before {
+  transform: translateX(15px);
+}
+.logo {
+  height: inherit;
+}
+
+.cart {
+  background-image: url(static/commerce-and-shopping.png);
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: right;
+  margin-top: 10px;
+  width: 40px;
+  height: 30px;
+}
+
+.number-of-orders {
+  background-color: var(--orange);
+  text-align: center;
+  font-size: 12px;
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  color: var(--white);
+  border-radius: 25px;
+}
+
+.filters {
+  padding-top: 70px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+.filters button {
+  width: 25%;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 25px;
+  border: solid 3px var(--orange);
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.filters .filter-active {
+  background-color: var(--orange);
+}
+
+.beer {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  border-radius: 15px;
+  color: var(--white);
+  display: grid;
+  grid-template-columns: 25% 1fr 1fr;
+  margin-bottom: 10px;
+}
+
+.beer-name {
+  font-size: var(--beer-headline);
+}
+
+.pic-price,
+.name-desc-storage,
+.input-add {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.amount {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.number {
+  color: var(--white);
+  background-color: transparent;
+  border: none;
+  text-align: center;
+}
+.beer-logo {
+  width: 90%;
+  margin-bottom: 10px;
+}
+
+.more,
+.less {
+  cursor: pointer;
+  border: none;
+  background-color: var(--white);
+  color: var(--blue);
+  font-weight: bold;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 25px;
+}
+
+button.add-to-cart {
+  border: solid 3px var(--orange);
+  background-color: var(--orange);
+  width: 100%;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border-radius: 25px;
+  color: var(--white);
+}
+
+button.add-to-cart:disabled {
+  background-color: transparent;
+}

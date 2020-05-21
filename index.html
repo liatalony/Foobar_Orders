@@ -7,7 +7,48 @@
     <link rel="stylesheet" href="stylesheet.css" />
   </head>
   <body>
-    Liat
+    <header>
+      <section class="color-theme">
+        <img src="static/moon.png" alt="dark" class="dark" />
+        <label class="switch" for="checkbox">
+          <input type="checkbox" id="checkbox" />
+          <div class="slider round"></div>
+        </label>
+        <img src="static/weather.png" alt="light" class="light" />
+      </section>
+      <img src="static/foobar-logo-white.png" alt="logo" class="logo" />
+      <section class="cart">
+        <p class="number-of-orders">1</p>
+      </section>
+    </header>
+    <main>
+      <section class="filters">
+        <button class="filter all filter-active">All</button>
+        <button class="filet light">Light</button>
+        <button class="filter dark">Dark</button>
+      </section>
+      <section class="beers">
+        <article class="beer">
+          <section class="pic-price">
+            <img class="beer-logo" src="static/elhefe.png" alt="beer logo" />
+            <p class="price"><span>35,-</span> /50cl</p>
+          </section>
+          <section class="name-desc-storage">
+            <h2 class="beer-name">Beer Name</h2>
+            <p class="beer-desc">The description of the beer</p>
+            <p class="storage">30 Y left</p>
+          </section>
+          <section class="input-add">
+            <section class="amount">
+              <button class="less">-</button>
+              <input id="number" class="number" type="text" value="0" size="2" />
+              <button class="more">+</button>
+            </section>
+            <button class="add-to-cart" disabled>Add to cart</button>
+          </section>
+        </article>
+      </section>
+    </main>
   </body>
   <script src="app.js"></script>
 </html>
