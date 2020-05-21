@@ -126,6 +126,8 @@ input:checked + .slider:before {
 
 .filters .filter-active {
   background-color: var(--orange);
+  color: var(--blue);
+  font-weight: bold;
 }
 
 .beer {
@@ -185,9 +187,11 @@ button.add-to-cart {
   padding-bottom: 5px;
   padding-top: 5px;
   border-radius: 25px;
-  color: var(--white);
+  color: var(--blue);
+  font-weight: bold;
 }
 
 button.add-to-cart:disabled {
   background-color: transparent;
+  color: var(--white);
 }
