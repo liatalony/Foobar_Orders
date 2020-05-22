@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Foobar</title>
     <link rel="stylesheet" href="stylesheet.css" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
     <main>
@@ -40,7 +43,11 @@
         <h3 class="white-titles">Ruined Childhood</h3>
         <div class="row">
           <h4 class="orange-delete">Delete</h4>
-          <plus-minus-button></plus-minus-button>
+          <div class="qty mt-5">
+            <span class="minus bg-dark">-</span>
+            <input type="number" class="count" name="qty" value="1" />
+            <span class="plus bg-dark">+</span>
+          </div>
           <h3 class="white-titles">2 X 35,-</h3>
         </div>
       </div>
