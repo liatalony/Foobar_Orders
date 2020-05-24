@@ -1,6 +1,13 @@
 window.addEventListener("DOMContentLoaded", init);
 
 function init() {
+  fetch("https://foobar-squad.herokuapp.com")
+    .then((res) => res.json())
+    .then((e) => {
+      console.log(e.taps);
+      e.taps.forEach(makeBeer);
+    });
+
   const addOne = document.querySelector(".more");
   const removeOne = document.querySelector(".less");
   let amount = document.querySelector(".number").value;
@@ -68,4 +75,10 @@ function slideLeft() {
     document.querySelector(".go-to-cart").style.opacity = "1";
     document.querySelector(".go-to-cart").disabled = false;
   }
+}
+
+function makeBeer(beer) {
+  const templateCopy = document.querySelector(".order-page-template").content.cloneNode(true);
+  templateCopy.querySelector(".beer-name").textContent = beer.beer;
+  document.querySelector(".beers").appendChild(templateCopy);
 }

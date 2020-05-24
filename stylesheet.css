@@ -29,18 +29,20 @@ body {
 }
 
 .wrapper {
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 main {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  padding-top: 70px;
+  padding-top: 50px;
   transition: 0.4s;
+  height: 100vh;
 }
 
 main > section {
   width: 100vw;
+  overflow: auto;
 }
 
 header {
@@ -135,6 +137,7 @@ button.cart {
 }
 
 .filters {
+  padding-top: 20px;
   margin-bottom: 20px;
   display: flex;
   flex-direction: row;
@@ -230,36 +233,7 @@ button.add-to-cart:disabled {
   margin-left: 10px;
   font-size: var(--big-headline);
 }
-/*
-html {
-  background-image: url(static/background.jpg);
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 
-body {
-  font-family: "Poppins", sans-serif;
-  color: white;
-}
-
-.app-logo {
-  display: flex;
-  justify-content: center;
-  color: white;
-  font-size: 50px;
-}
-
-.bar-title {
-  color: white;
-  font-size: 50px;
-}
-
-.logo {
-  max-width: 50px;
-}
-*/
 .section {
   background-color: rgb(44, 44, 44, 0.6);
   margin: 20px 0 20px 0;
@@ -290,27 +264,12 @@ body {
 .description-total {
   display: flex;
   justify-content: space-between;
-  margin: 30px 20px 5px 20px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #ff7e00;
-} /*
-
-button {
-  border-radius: 25px;
-  color: #ffffff;
-  padding: 12px 25px;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  text-transform: uppercase;
-  font-weight: 600;
-  transition: all 0.5s ease;
-  background-color: #ff7e00;
+  margin: 30px 20px 30px 20px;
+  padding-top: 10px;
+  border-top: 2px solid #ff7e00;
 }
 
-.proceed-button {
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
+.proceed {
+  display: block;
+  margin: auto;
 }
-/*DESCRIPTION page ends*/
