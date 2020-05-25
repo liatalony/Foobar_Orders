@@ -52,7 +52,7 @@ function init() {
 }
 
 //Bootstrap count button
-
+/*
 $(document).ready(function () {
   $(".count").prop("disabled", true);
   $(document).on("click", ".plus", function () {
@@ -64,7 +64,7 @@ $(document).ready(function () {
       $(".count").val(1);
     }
   });
-});
+});*/
 let counter = 0;
 function slideRight() {
   console.log("right");
