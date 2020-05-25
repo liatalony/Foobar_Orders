@@ -273,6 +273,71 @@ button.add-to-cart:disabled {
   display: block;
   margin: auto;
 }
+
+.qty .count {
+  color: var(--white);
+  background-color: transparent;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 30px;
+  padding: 0 2px;
+  min-width: 35px;
+  text-align: center;
+}
+.qty .plus {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  color: #000;
+  background-color: var(--white) !important;
+  width: 30px;
+  height: 30px;
+  font: 30px/1 Arial, sans-serif;
+  text-align: center;
+  border-radius: 50%;
+}
+.qty .minus {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  color: #000;
+  background-color: var(--white) !important;
+  width: 30px;
+  height: 30px;
+  font: 30px/1 Arial, sans-serif;
+  text-align: center;
+  border-radius: 50%;
+  background-clip: padding-box;
+}
+#count-button {
+  text-align: center;
+}
+.minus:hover {
+  background-color: var(--orange) !important;
+}
+.plus:hover {
+  background-color: var(--orange) !important;
+}
+/*Prevent text selection*/
+span {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+input {
+  border: 0;
+  width: 2%;
+}
+nput::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input:disabled {
+  background-color: white;
+}
 /*DESCRIPTION page ends*/
 
 /* //////////////////////Andy///////////////////// */
