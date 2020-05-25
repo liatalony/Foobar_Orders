@@ -212,6 +212,7 @@ body {
 }
 
 .app-logo {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   color: white;
@@ -346,3 +347,29 @@ input:disabled {
   background-color: white;
 }
 /*DESCRIPTION page ends*/
+
+/* //////////////////////Andy///////////////////// */
+.container {
+  display: flex;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 30px;
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); */
+  max-width: 100%;
+}
+.header {
+  padding: 20px 40px;
+}
+.header h2 {
+  margin: 0;
+}
+.payment-info {
+  padding: 20px 40px;
+  border-bottom: 1px solid var(--orange);
+  color: var(--orange);
+}
+.payment-info h1 {
+  margin: 0;
+}
+
+/* /...........Andy............... */
