@@ -25,17 +25,36 @@ body {
   background-image: url(static/29440531895_09f8f7f78c_k.jpg);
   background-repeat: no-repeat;
   background-position: center;
+  color: var(--white);
+}
+
+.wrapper {
+  overflow: hidden;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-top: 50px;
+  transition: 0.4s;
+  height: 100vh;
+}
+
+main > section {
+  width: 100vw;
+  overflow: auto;
 }
 
 header {
   background-color: var(--blue);
-  width: 100%;
+  width: 100vw;
   height: 50px;
   border-bottom: 1px solid gray;
   position: fixed;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  z-index: 10;
 }
 
 .color-theme .dark,
@@ -86,8 +105,15 @@ input:checked + .slider:before {
   height: inherit;
 }
 
-.cart {
+.go-to-cart {
+  position: relative;
+  transition: 0.4s;
+}
+button.cart {
+  position: relative;
   background-image: url(static/commerce-and-shopping.png);
+  background-color: transparent;
+  border: none;
   background-size: 30px 30px;
   background-repeat: no-repeat;
   background-position: right;
@@ -97,6 +123,9 @@ input:checked + .slider:before {
 }
 
 .number-of-orders {
+  position: absolute;
+  top: 10px;
+  left: 0;
   background-color: var(--orange);
   text-align: center;
   font-size: 12px;
@@ -108,7 +137,7 @@ input:checked + .slider:before {
 }
 
 .filters {
-  padding-top: 70px;
+  padding-top: 20px;
   margin-bottom: 20px;
   display: flex;
   flex-direction: row;
@@ -182,50 +211,27 @@ input:checked + .slider:before {
   border-radius: 25px;
 }
 
-button.add-to-cart {
+button {
   border: solid 3px var(--orange);
   background-color: var(--orange);
-  width: 100%;
+  width: 30%;
   padding-bottom: 5px;
   padding-top: 5px;
   border-radius: 25px;
   color: var(--blue);
   font-weight: bold;
 }
-
+button.add-to-cart {
+  width: 100%;
+}
 button.add-to-cart:disabled {
   background-color: transparent;
   color: var(--white);
 }
 
-html {
-  background-image: url(static/background.jpg);
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-body {
-  font-family: "Poppins", sans-serif;
-  color: white;
-}
-
-.app-logo {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  color: white;
-  font-size: 50px;
-}
-
-.bar-title {
-  color: white;
-  font-size: 50px;
-}
-
-.logo {
-  max-width: 50px;
+.previous {
+  margin-left: 10px;
+  font-size: var(--big-headline);
 }
 
 .section {
@@ -258,28 +264,14 @@ body {
 .description-total {
   display: flex;
   justify-content: space-between;
-  margin: 30px 20px 5px 20px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #ff7e00;
+  margin: 30px 20px 30px 20px;
+  padding-top: 10px;
+  border-top: 2px solid #ff7e00;
 }
 
-button {
-  border-radius: 25px;
-  color: #ffffff;
-  padding: 12px 25px;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  text-transform: uppercase;
-  font-weight: 600;
-  transition: all 0.5s ease;
-  background-color: #ff7e00;
-}
-
-.proceed-button {
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
+.proceed {
+  display: block;
+  margin: auto;
 }
 
 .qty .count {
