@@ -2,8 +2,9 @@ window.addEventListener("DOMContentLoaded", init);
 const theme = document.querySelector("#checkbox");
 
 function init() {
-  let themeCheck = localStorage.getItem("theme-color");
+  let themeCheck = localStorage.getItem("theme-color"); // checking what the selected theme is in the local storage
   if (themeCheck == "light") {
+    //if light theme is selected
     enableLightMode();
   }
   theme.addEventListener("change", changeTheme);
@@ -28,23 +29,24 @@ function init() {
 }
 
 function enableLightMode() {
-  document.querySelector("body").classList.add("light-mode");
-  const theme = (document.querySelector("#checkbox").checked = true);
-  localStorage.setItem("theme-color", "light");
+  document.querySelector("body").classList.add("light-mode"); //class that changes the :root cusom variables
+  document.querySelector("#checkbox").checked = true; // theme checkbox is checked
+  localStorage.setItem("theme-color", "light"); // updates to local storage
 }
 function disableLightMode() {
-  document.querySelector("body").classList.remove("light-mode");
-  const theme = (document.querySelector("#checkbox").checked = false);
-  localStorage.setItem("theme-color", null);
+  document.querySelector("body").classList.remove("light-mode"); //removes light mode class
+  document.querySelector("#checkbox").checked = false; // theme checkbox is not checked
+  localStorage.setItem("theme-color", null); // updated to local storage
 }
 function changeTheme() {
-  lightMode = localStorage.getItem("theme-color");
+  // clicking eventListener to cahnge the color theme
+  lightMode = localStorage.getItem("theme-color"); // get the data in local storage
   if (theme.checked == true) {
-    console.log("box is checked");
-    enableLightMode();
+    // if checkbox is checked
+    enableLightMode(); // change to light Mode
   } else {
-    console.log("box is not checked");
-    disableLightMode();
+    // if checkbox is not checked
+    disableLightMode(); // change to dark/default mode
   }
 }
 
@@ -79,8 +81,8 @@ let counter = 0; // decides the position of the page
 function slideRight() {
   counter++;
   document.querySelector("main").style.transform = "translateX(" + -100 * counter + "vw)"; //move to this point
+  cart.removeEventListener("click", slideRight);
   document.querySelector(".go-to-cart").style.opacity = "0";
-  document.querySelector(".go-to-cart").disabled = true;
 }
 
 function slideLeft() {
@@ -88,6 +90,7 @@ function slideLeft() {
   document.querySelector("main").style.transform = "translateX(" + -100 * counter + "vw)"; //move to this point
   if (counter == 0) {
     document.querySelector(".go-to-cart").style.opacity = "1";
+    cart.addEventListener("click", slideRight);
     document.querySelector(".go-to-cart").disabled = false;
   }
 }
