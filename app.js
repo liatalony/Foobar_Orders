@@ -7,6 +7,17 @@ function init() {
       console.log(e.taps);
       e.taps.forEach(makeBeer);
     });
+  // fetch("https://foobar-squad.herokuapp.com/beertypes")
+  //   .then((res) => res.json())
+  //   .then(makeBeer);
+
+  // const beerArray = [];
+
+  //   function prepareObjects(jsonData) {
+  //   beerArray = jsonData.map(preapareObject);
+
+  //   displayList(beerArray);
+  // }
 
   const addOne = document.querySelector(".more");
   const removeOne = document.querySelector(".less");
@@ -80,5 +91,25 @@ function slideLeft() {
 function makeBeer(beer) {
   const templateCopy = document.querySelector(".order-page-template").content.cloneNode(true);
   templateCopy.querySelector(".beer-name").textContent = beer.beer;
+
+  //Creating modal for each beer description //
+  const article = templateCopy.querySelector("article");
+  article.addEventListener("click", function () {
+    var element = document.querySelector(".modalcontainer");
+    const modal = document.querySelector(".modalbg");
+    modal.style.display = "block";
+    const modalBeerName = document.querySelector(".modal-beername");
+    modalBeerName.textContent = beer.beer;
+    const body = document.querySelector("body");
+    body.classList.add("modalopen");
+    const exit = document.querySelector(".exit");
+    exit.addEventListener("click", function () {
+      modal.style.display = "none";
+      body.classList.remove("modalopen");
+      element.classList.remove(...element.classList);
+      element.classList.add("modalcontainer");
+    });
+  });
+
   document.querySelector(".beers").appendChild(templateCopy);
 }
