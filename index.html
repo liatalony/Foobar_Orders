@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a142d" />
     <title>Foobar</title>
     <link rel="stylesheet" href="stylesheet.css" />
     <script src="https://js.stripe.com/v3/"></script>
@@ -21,7 +22,7 @@
         <img src="static/foobar-logo-white.png" alt="logo" class="logo" />
         <section class="go-to-cart">
           <button class="cart"></button>
-          <p class="number-of-orders">1</p>
+          <p class="number-of-orders hidden">0</p>
         </section>
       </header>
       <main>
@@ -32,25 +33,6 @@
             <button class="filter dark">Dark</button>
           </section>
           <section class="beers">
-            <article class="beer">
-              <section class="pic-price">
-                <img class="beer-logo" src="static/elhefe.png" alt="beer logo" />
-                <p class="price"><span>35,-</span> /50cl</p>
-              </section>
-              <section class="name-desc-storage">
-                <h2 class="beer-name">Beer Name</h2>
-                <p class="beer-desc">The description of the beer</p>
-                <p class="storage">30 Y left</p>
-              </section>
-              <section class="input-add">
-                <section class="amount">
-                  <button class="less">-</button>
-                  <input id="number" class="number" type="text" value="0" size="2" />
-                  <button class="more">+</button>
-                </section>
-                <button class="add-to-cart" disabled>Add to cart</button>
-              </section>
-            </article>
           </section>
         </section>
         <section class="your-order-page">
@@ -130,23 +112,33 @@
     <template class="order-page-template">
       <article class="beer">
         <section class="pic-price">
-          <img class="beer-logo" src="static/elhefe.png" alt="beer logo" />
+          <img class="beer-logo" src="static/beer-logos/fairytaleale.png" alt="beer logo" />
           <p class="price"><span>35,-</span> /50cl</p>
         </section>
         <section class="name-desc-storage">
           <h2 class="beer-name">Beer Name</h2>
           <p class="beer-desc">The description of the beer</p>
-          <p class="storage">30 Y left</p>
+          <p class="storage"><span>30</span><img class="small-beer" src="static/SVG FooBar/beer.svg" alt="beer" > left in keg</p>
         </section>
         <section class="input-add">
           <section class="amount">
             <button class="less">-</button>
-            <input id="number" class="number" type="text" value="0" size="2" />
+            <input class="number" type="text" value="0" size="2" />
             <button class="more">+</button>
           </section>
           <button class="add-to-cart" disabled>Add to cart</button>
         </section>
       </article>
+    </template>
+    <template class="your-order-template">
+      <div class="section">
+        <h3 class="white-titles">Fairy Tale Ale</h3>
+        <div class="row">
+          <h4 class="orange-delete">Delete</h4>
+          <plus-minus-button></plus-minus-button>
+          <h3 class="white-titles">1 X 35,-</h3>
+        </div>
+      </div>
     </template>
     </main>
   </body>
