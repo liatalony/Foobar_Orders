@@ -15,6 +15,17 @@ function init() {
       console.log(e.taps);
       e.taps.forEach(makeBeer); //only sending th tap list
     });
+  // fetch("https://foobar-squad.herokuapp.com/beertypes")
+  //   .then((res) => res.json())
+  //   .then(makeBeer);
+
+  // const beerArray = [];
+
+  //   function prepareObjects(jsonData) {
+  //   beerArray = jsonData.map(preapareObject);
+
+  //   displayList(beerArray);
+  // }
 
   //addToCartDisabled();
 
@@ -63,21 +74,7 @@ function addToCartDisabled() {
   }
 }
 
-//Bootstrap count button
-/*
-$(document).ready(function () {
-  $(".count").prop("disabled", true);
-  $(document).on("click", ".plus", function () {
-    $(".count").val(parseInt($(".count").val()) + 1);
-  });
-  $(document).on("click", ".minus", function () {
-    $(".count").val(parseInt($(".count").val()) - 1);
-    if ($(".count").val() == 0) {
-      $(".count").val(1);
-    }
-  });
-});*/
-let counter = 0; // decides the position of the page
+let counter = 0;
 function slideRight() {
   counter++;
   document.querySelector("main").style.transform = "translateX(" + -100 * counter + "vw)"; //move to this point
@@ -251,6 +248,29 @@ function setOutcome(result) {
     errorElement.textContent = result.error.message;
     errorElement.classList.add("visible");
   }
+  const templateCopy = document.querySelector(".order-page-template").content.cloneNode(true);
+  templateCopy.querySelector(".beer-name").textContent = beer.beer;
+
+  //Creating modal for each beer description //
+  const article = templateCopy.querySelector("article");
+  article.addEventListener("click", function () {
+    var element = document.querySelector(".modalcontainer");
+    const modal = document.querySelector(".modalbg");
+    modal.style.display = "block";
+    const modalBeerName = document.querySelector(".modal-beername");
+    modalBeerName.textContent = beer.beer;
+    const body = document.querySelector("body");
+    body.classList.add("modalopen");
+    const exit = document.querySelector(".exit");
+    exit.addEventListener("click", function () {
+      modal.style.display = "none";
+      body.classList.remove("modalopen");
+      element.classList.remove(...element.classList);
+      element.classList.add("modalcontainer");
+    });
+  });
+
+  document.querySelector(".beers").appendChild(templateCopy);
 }
 
 card.on("change", function (event) {
