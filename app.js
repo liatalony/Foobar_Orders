@@ -1,6 +1,13 @@
 window.addEventListener("DOMContentLoaded", init);
+const theme = document.querySelector("#checkbox");
 
 function init() {
+  let themeCheck = localStorage.getItem("theme-color");
+  if (themeCheck == "light") {
+    enableLightMode();
+  }
+  theme.addEventListener("change", changeTheme);
+
   fetch("https://foobar-squad.herokuapp.com") //fetching all the bar info
     .then((res) => res.json())
     .then((e) => {
@@ -18,6 +25,27 @@ function init() {
   prev.forEach(function (button) {
     button.addEventListener("click", slideLeft);
   });
+}
+
+function enableLightMode() {
+  document.querySelector("body").classList.add("light-mode");
+  const theme = (document.querySelector("#checkbox").checked = true);
+  localStorage.setItem("theme-color", "light");
+}
+function disableLightMode() {
+  document.querySelector("body").classList.remove("light-mode");
+  const theme = (document.querySelector("#checkbox").checked = false);
+  localStorage.setItem("theme-color", null);
+}
+function changeTheme() {
+  lightMode = localStorage.getItem("theme-color");
+  if (theme.checked == true) {
+    console.log("box is checked");
+    enableLightMode();
+  } else {
+    console.log("box is not checked");
+    disableLightMode();
+  }
 }
 
 const cart = document.querySelector(".cart"); //cart button
