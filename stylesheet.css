@@ -2,12 +2,32 @@
   --blue: #0a142d;
   --orange: #ff7e00;
   --white: #ffffff;
-  --big-headline: 24px;
-  --beer-headline: 18px;
-  --text: 14px;
+  --big-headline-size: 24px;
+  --big-headline-color: #ff7e00;
+  --beer-headline-size: 18px;
+  --beer-headline-color: #ffffff;
+  --text-size: 14px;
+  --text-color: #ffffff;
+  --bg-img: url(static/29440531895_09f8f7f78c_k.jpg);
+  --opacity-color: rgba(0, 0, 0, 0.6);
+  --button-border: #ff7e00;
+  --shadow: none;
+  --button-color: transparent;
+  --selected: #0a142d;
+}
+
+.light-mode {
+  --big-headline-color: #ff7e00;
+  --beer-headline-color: #0a142d;
+  --text-color: #0a142d;
+  --bg-img: #e0dfdf;
+  --opacity-color: rgba(255, 255, 255, 1);
+  --button-border: #0a142d;
+  --shadow: 0px 3px 2px rgb(150, 150, 150);
+  --selected: #ffffff;
 }
 /*DESCRIPTION page starts*/
-@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap");
+/*@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap");*/
 
 * {
   box-sizing: border-box;
@@ -22,14 +42,19 @@ input[type="number"] {
 }
 
 body {
-  background-image: url(static/29440531895_09f8f7f78c_k.jpg);
+  background: var(--bg-img);
   background-repeat: no-repeat;
   background-position: center;
-  color: var(--white);
+  color: var(--text-color);
+  transition: 0.4s;
 }
 
 .wrapper {
   overflow: hidden;
+}
+
+.hidden {
+  display: none;
 }
 
 main {
@@ -56,7 +81,11 @@ header {
   justify-content: space-around;
   z-index: 10;
 }
-
+.color-theme {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
 .color-theme .dark,
 .color-theme .light {
   height: 18px;
@@ -84,7 +113,6 @@ header {
   top: 0;
   border-radius: 25px;
   transition: 0.4s;
-  transition-delay: 0s;
 }
 
 .slider:before {
@@ -98,6 +126,7 @@ header {
   left: 4px;
   transition: 0.4s;
 }
+
 input:checked + .slider:before {
   transform: translateX(15px);
 }
@@ -150,29 +179,32 @@ button.cart {
   padding-top: 3px;
   padding-bottom: 3px;
   border-radius: 25px;
-  border: solid 3px var(--orange);
-  background-color: var(--blue);
-  color: var(--white);
+  border: solid 3px var(--button-border);
+  background-color: var(--button-color);
+  color: var(--text-color);
 }
 
 .filters .filter-active {
-  background-color: var(--orange);
-  color: var(--blue);
+  background-color: var(--button-border);
+  color: var(--selected);
   font-weight: bold;
 }
 
 .beer {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--opacity-color);
+  border: var(--opacity-border);
+  box-shadow: var(--shadow);
   padding: 10px;
   border-radius: 15px;
-  color: var(--white);
+  color: var(--text-color);
   display: grid;
   grid-template-columns: 25% 1fr 1fr;
   margin-bottom: 10px;
 }
 
 .beer-name {
-  font-size: var(--beer-headline);
+  font-size: var(--beer-headline-size);
+  color: var(--beer-headline-color);
 }
 
 .pic-price,
@@ -183,26 +215,35 @@ button.cart {
   justify-content: space-around;
 }
 .amount {
+  display: flex;
+  flex-wrap: nowrap;
   margin-left: auto;
   margin-right: auto;
 }
 
 .number {
-  color: var(--white);
+  color: var(--text-color);
   background-color: transparent;
   border: none;
   text-align: center;
+  width: 30px;
+  padding: 5px;
 }
 .beer-logo {
-  width: 90%;
+  width: 80%;
   margin-bottom: 10px;
+}
+
+.small-beer {
+  width: 15px;
+  height: auto;
 }
 
 .more,
 .less {
   cursor: pointer;
   border: none;
-  background-color: var(--white);
+  background-color: var(--big-headline-color);
   color: var(--blue);
   font-weight: bold;
   text-align: center;
@@ -226,16 +267,17 @@ button.add-to-cart {
 }
 button.add-to-cart:disabled {
   background-color: transparent;
-  color: var(--white);
+  color: var(--text-color);
+  border: solid 3px var(--button-border);
 }
 
 .previous {
   margin-left: 10px;
-  font-size: var(--big-headline);
+  font-size: var(--big-headline-size);
 }
 
 .section {
-  background-color: rgb(44, 44, 44, 0.6);
+  background-color: var(--opacity-color);
   margin: 20px 0 20px 0;
   padding: 10px 30px 10px 30px;
 }
@@ -246,7 +288,7 @@ button.add-to-cart:disabled {
   padding-top: 10px;
 }
 .orange-titles {
-  color: #ff7e00;
+  color: var(--big-headline-color);
 }
 
 .description-title {
@@ -254,11 +296,11 @@ button.add-to-cart:disabled {
   justify-content: space-between;
   margin: 30px 20px 5px 20px;
   padding-bottom: 10px;
-  border-bottom: 2px solid #ff7e00;
+  border-bottom: 2px solid var(--orange);
 }
 
 .orange-delete {
-  color: #ff7e00;
+  color: var(--big-headline-color);
 }
 
 .description-total {
@@ -266,7 +308,7 @@ button.add-to-cart:disabled {
   justify-content: space-between;
   margin: 30px 20px 30px 20px;
   padding-top: 10px;
-  border-top: 2px solid #ff7e00;
+  border-top: 2px solid var(--big-headline-color);
 }
 
 .proceed {
@@ -285,12 +327,7 @@ button.add-to-cart:disabled {
   /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); */
   max-width: 100%;
 }
-.header {
-  padding: 20px 40px;
-}
-.header h2 {
-  margin: 0;
-}
+
 .payment-info {
   padding: 20px 40px;
   border-bottom: 1px solid var(--orange);
@@ -300,6 +337,115 @@ button.add-to-cart:disabled {
   margin: 0;
 }
 
+form {
+  width: 300px;
+  margin: 20px auto;
+}
+
+label {
+  height: 35px;
+  position: relative;
+  color: #8798ab;
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+label > span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-weight: 300;
+  line-height: 32px;
+  color: #8798ab;
+  border-bottom: 1px solid #586a82;
+  transition: border-bottom-color 200ms ease-in-out;
+  cursor: text;
+  pointer-events: none;
+}
+
+label > span span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0% 50%;
+  transition: transform 200ms ease-in-out;
+  cursor: text;
+}
+
+label .field.is-focused + span span,
+label .field:not(.is-empty) + span span {
+  transform: scale(0.68) translateY(-36px);
+  cursor: default;
+}
+
+label .field.is-focused + span {
+  border-bottom-color: #34d08c;
+}
+
+.field {
+  background: transparent;
+  font-weight: 300;
+  border: 0;
+  color: white;
+  outline: none;
+  cursor: text;
+  display: block;
+  width: 100%;
+  line-height: 32px;
+  padding-bottom: 3px;
+  transition: opacity 200ms ease-in-out;
+}
+
+.field::-webkit-input-placeholder {
+  color: #8898aa;
+}
+.field::-moz-placeholder {
+  color: #8898aa;
+}
+
+/* IE doesn't show placeholders when empty+focused */
+.field:-ms-input-placeholder {
+  color: #424770;
+}
+
+.field.is-empty:not(.is-focused) {
+  opacity: 0;
+}
+
+.outcome {
+  float: left;
+  width: 100%;
+  padding-top: 8px;
+  min-height: 20px;
+  text-align: center;
+}
+
+.success,
+.error {
+  display: none;
+  font-size: 15px;
+}
+
+.success.visible,
+.error.visible {
+  display: inline;
+}
+
+.error {
+  color: #e4584c;
+}
+
+.success {
+  color: #34d08c;
+}
+
+.success .token {
+  font-weight: 500;
+  font-size: 15px;
+}
 /* /...........Andy............... */
 
 /*---MODAL STYLING FOR THE BEER DESCRIPTIONS---*/
