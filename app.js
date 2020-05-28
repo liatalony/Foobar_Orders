@@ -32,13 +32,27 @@ function init() {
   //input.addEventListener("keydown", addToCartDisabled);
 
   // eventListeners for the sliders
-  cart.addEventListener("click", slideRight);
-  goToPayment.addEventListener("click", slideRight);
-  prev.forEach(function (button) {
-    button.addEventListener("click", slideLeft);
-  });
 }
 
+const cart = document.querySelector(".cart"); //cart button
+let numOfOrders = document.querySelector(".number-of-orders"); // number of orders in the cart
+const goToPayment = document.querySelector(".proceed"); // procceed button in "your order" page
+const prev = document.querySelectorAll(".previous"); // back arrows to slide back
+
+const beerCart = []; // Array to save all the ordered beers
+const beerInfo = {
+  //the object for each type of ordered beer
+  name: "",
+  amount: 0,
+};
+cart.addEventListener("click", slideRight);
+
+goToPayment.addEventListener("click", slideRight);
+prev.forEach(function (button) {
+  button.addEventListener("click", slideLeft);
+});
+
+// ----------------- <THEME SWITCHER> ------------------
 function enableLightMode() {
   document.querySelector("body").classList.add("light-mode"); //class that changes the :root cusom variables
   document.querySelector("#checkbox").checked = true; // theme checkbox is checked
@@ -60,11 +74,7 @@ function changeTheme() {
     disableLightMode(); // change to dark/default mode
   }
 }
-
-const cart = document.querySelector(".cart"); //cart button
-let numOfOrders = document.querySelector(".number-of-orders"); // number of orders in the cart
-const goToPayment = document.querySelector(".proceed"); // procceed button in "your order" page
-const prev = document.querySelectorAll(".previous"); // back arrows to slide back
+// ----------------- </THEME SWITCHER> ------------------
 
 function addToCartDisabled() {
   if (amount > 0) {
@@ -76,10 +86,12 @@ function addToCartDisabled() {
 
 let counter = 0;
 function slideRight() {
-  counter++;
-  document.querySelector("main").style.transform = "translateX(" + -100 * counter + "vw)"; //move to this point
-  cart.removeEventListener("click", slideRight);
-  document.querySelector(".go-to-cart").style.opacity = "0";
+  if (beerCart.length !== 0) {
+    counter++;
+    document.querySelector("main").style.transform = "translateX(" + -100 * counter + "vw)"; //move to this point
+    cart.removeEventListener("click", slideRight);
+    document.querySelector(".go-to-cart").style.opacity = "0";
+  }
 }
 
 function slideLeft() {
@@ -92,25 +104,48 @@ function slideLeft() {
   }
 }
 
-const beerCart = []; // Array to save all the ordered beers
-const beerInfo = {
-  //the object for each type of ordered beer
-  beerName: "",
-  amount: 0,
-  price: 35,
-};
-
 function makeBeer(beer) {
   // append all the beers on tap in the html with the right data
   const templateCopy = document.querySelector(".order-page-template").content.cloneNode(true); // copying the template
-  templateCopy.querySelector(".beer-name").textContent = beer.beer; //beer name
-  templateCopy.querySelector(".storage span").textContent = beer.level / 50 + " "; // number of beer cups left
-  const beerLogo = templateCopy.querySelector(".beer-logo"); // beer img
-  beerLogo.src = `beer-logos/${beer.beer.replace(/\s/g, "").toLowerCase()}.png`; //beer img src
-
   const inputField = templateCopy.querySelector("input"); // number of beer
   const plus = templateCopy.querySelector(".more"); // plus button
   const minus = templateCopy.querySelector(".less"); // minus button
+  const beerLogo = templateCopy.querySelector(".beer-logo"); // beer img
+
+  templateCopy.querySelector(".beer-name").textContent = beer.beer; //beer name
+  templateCopy.querySelector(".storage span").textContent = beer.level / 50 + " "; // number of beer cups left
+  beerLogo.src = `beer-logos/${beer.beer.replace(/\s/g, "").toLowerCase()}.png`; //beer img src
+
+  inputField.addEventListener("input", (event) => {
+    event.preventDefault();
+
+    console.log("typing");
+    if (inputField.value !== "") {
+      //checks if the input field is empty or 0. ignores if its one of the two
+      console.log("im in");
+      const beerCheck = beerCart.filter((Object) => Object.name == beer.beer); // check if this beer already exists in the cart
+      if (beerCheck.length == 0) {
+        // if beer does not exist in the cart
+        const beerorder = Object.create(beerInfo); // create a new beerInfo object
+        beerorder.name = beer.beer; //append beer name
+        beerorder.amount = Number(inputField.value); // append beer amount
+        beerCart.push(beerorder); // add the beer to the cart
+      } else {
+        // if  beer does exist in cart
+        beerCart.map((Object) => {
+          //get the object of that beer from the cart
+          if (inputField.value == 0) {
+            // if the number of beers on the order is 1 -  remove the object from the cart
+            beerCart.splice(Object, 1);
+          } else if (Object.name == beer.beer) {
+            Object.amount = Number(inputField.value); // update the amount of that beer
+          }
+        });
+      }
+      console.log(inputField.value);
+      updateCart();
+    }
+  });
 
   plus.addEventListener("click", function (event) {
     // add beer to cart by clicking plus
@@ -120,11 +155,11 @@ function makeBeer(beer) {
       //event.preventDefault();
       const currentValue = Number(inputField.value); // the current number thats in the input
       inputField.value = currentValue + 1; // add 1 to that number
-      const beerCheck = beerCart.filter((Object) => Object.beerName == beer.beer); // check if this beer already exists in the cart
+      const beerCheck = beerCart.filter((Object) => Object.name == beer.beer); // check if this beer already exists in the cart
       if (beerCheck.length == 0) {
         // if beer does not exist in the cart
         const beerorder = Object.create(beerInfo); // create a new beerInfo object
-        beerorder.beerName = beer.beer; //append beer name
+        beerorder.name = beer.beer; //append beer name
         beerorder.amount++; // append beer amount
 
         beerCart.push(beerorder); // add the beer to the cart
@@ -132,7 +167,7 @@ function makeBeer(beer) {
         // if  beer does exist in cart
         beerCart.map((Object) => {
           //get the object of that beer from the cart
-          if (Object.beerName == beer.beer) {
+          if (Object.name == beer.beer) {
             Object.amount++; // update the amount of that beer
           }
         });
@@ -149,7 +184,7 @@ function makeBeer(beer) {
       inputField.value = currentValue - 1; // remove one beer from that current number
       beerCart.map((Object) => {
         //get the beer order from the cart
-        if (Object.beerName == beer.beer) {
+        if (Object.name == beer.beer) {
           if (Object.amount == 1) {
             // if the number of beers on the order is 1 -  remove the object from the cart
             beerCart.splice(Object, 1);
@@ -174,15 +209,47 @@ function updateCart() {
   let totalAmount = 0;
   if (beerCart.length == 0) {
     numOfOrders.classList.add("hidden");
-  }
-  for (let index = 0; index < beerCart.length; index++) {
-    // loop the adds the amount of each beer to a total number of all the beers in the cart
-    totalAmount = totalAmount + beerCart[index].amount;
+  } else {
+    numOfOrders.classList.remove("hidden");
+    for (let index = 0; index < beerCart.length; index++) {
+      // loop the adds the amount of each beer to a total number of all the beers in the cart
+      totalAmount = totalAmount + beerCart[index].amount;
+    }
   }
   numOfOrders.textContent = totalAmount;
 
   console.log(beerCart);
 }
+
+// ---------------- <POST> ------------------------
+
+const btn = document.querySelector(".filter.light");
+btn.addEventListener("click", sendOrder);
+
+function sendOrder() {
+  console.log("sending...");
+
+  const order = JSON.stringify(beerCart);
+  fetch("https://foobar-squad.herokuapp.com/order", {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: order,
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      document.querySelectorAll(".order-page input").forEach((e) => {
+        e.value = 0;
+      });
+      beerCart.splice(0, beerCart.length);
+      console.log(beerCart);
+      updateCart();
+    });
+}
+
+// ---------------- </POST> -----------------------
 
 ///////Andy////////
 var stripe = Stripe("pk_test_LuzUexPeMfDZJScP1gp1mcLa00TQx0THAK");

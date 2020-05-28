@@ -42,15 +42,16 @@ input[type="number"] {
 }
 
 body {
-  background: var(--bg-img);
-  background-repeat: no-repeat;
-  background-position: center;
   color: var(--text-color);
   transition: 0.4s;
 }
 
 .wrapper {
-  overflow: hidden;
+  /*overflow: hidden;*/
+  background: var(--bg-img);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .hidden {
@@ -59,7 +60,7 @@ body {
 
 main {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   padding-top: 50px;
   transition: 0.4s;
   height: 100vh;

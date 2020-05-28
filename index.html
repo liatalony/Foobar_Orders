@@ -29,7 +29,7 @@
         <section class="order-page">
           <section class="filters">
             <button class="filter all filter-active">All</button>
-            <button class="filet light">Light</button>
+            <button class="filter light">Light</button>
             <button class="filter dark">Dark</button>
           </section>
           <section class="beers">
@@ -134,6 +134,11 @@
           </div>
         </form>
         </section>
+        <section class="recipt">
+          <h1>Your order has been made</h1>
+          <p>your order number is</p>
+          <p class="order-number">12</p>
+        </section>
       </main>
     </div>
     <template class="order-page-template">
@@ -150,7 +155,7 @@
         <section class="input-add">
           <section class="amount">
             <button class="less">-</button>
-            <input class="number" type="text" value="0" size="2" />
+            <input class="number" type="text" value="0" maxlength="2" />
             <button class="more">+</button>
           </section>
           <button class="add-to-cart" disabled>Add to cart</button>
