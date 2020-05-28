@@ -326,9 +326,11 @@ button.add-to-cart:disabled {
 
 .modalcontent {
   background-color: var(--white);
+  color: var(--blue);
   margin: 15% auto;
   padding: 15px;
   width: 90%;
+  font-size: 20px;
 }
 
 /* Exit from MODAL */
@@ -347,6 +349,19 @@ button.add-to-cart:disabled {
 }
 
 .modal-beername {
-  color: var(--blue);
-  font-size: 40px;
+  font-size: 30px;
+  padding-bottom: 10px;
+}
+
+.modal-img {
+  max-width: 50%;
+  padding-bottom: 10px;
+}
+
+.modal-category {
+  padding-bottom: 10px;
+}
+
+.modal-alc {
+  padding-bottom: 10px;
 }

@@ -1,5 +1,17 @@
 window.addEventListener("DOMContentLoaded", init);
 
+var beerArray = [];
+
+// var cart = [];
+
+// function updateCart(beerName, amount, price) {
+//   if (cart.includes((x) => x.name == beerName)) {
+//     cart.find((x) => x.name == beerName).amount = amount;
+//   } else {
+//     cart.add({ name: beerName, amount: amount, price: price });
+//   }
+// }
+
 function init() {
   fetch("https://foobar-squad.herokuapp.com")
     .then((res) => res.json())
@@ -7,17 +19,11 @@ function init() {
       console.log(e.taps);
       e.taps.forEach(makeBeer);
     });
-  // fetch("https://foobar-squad.herokuapp.com/beertypes")
-  //   .then((res) => res.json())
-  //   .then(makeBeer);
-
-  // const beerArray = [];
-
-  //   function prepareObjects(jsonData) {
-  //   beerArray = jsonData.map(preapareObject);
-
-  //   displayList(beerArray);
-  // }
+  fetch("https://foobar-squad.herokuapp.com/beertypes")
+    .then((res) => res.json())
+    .then(function (res) {
+      beerArray = res;
+    });
 
   const addOne = document.querySelector(".more");
   const removeOne = document.querySelector(".less");
@@ -41,13 +47,19 @@ function init() {
 
   function moreBeer() {
     amount++;
+    // beerName = "Steampunk"; //replace with actual value
+    // price = 35; //replace with actual value
     document.querySelector(".number").value = amount;
+    // updateCart(beerName, amount, price);
     addToCartDisabled();
   }
 
   function lessBeer() {
     if (amount > 0) {
       amount--;
+      // beerName = "Steampunk"; //replace with actual value
+      // price = 35; //replace with actual value
+      // updateCart(beerName, amount, price);
       document.querySelector(".number").value = amount;
       addToCartDisabled();
     }
@@ -98,8 +110,23 @@ function makeBeer(beer) {
     var element = document.querySelector(".modalcontainer");
     const modal = document.querySelector(".modalbg");
     modal.style.display = "block";
+
     const modalBeerName = document.querySelector(".modal-beername");
-    modalBeerName.textContent = beer.beer;
+    var beerType = beerArray.find((x) => x.name == beer.beer);
+    modalBeerName.textContent = beerType.name;
+
+    const modalBeerImg = document.querySelector(".modal-img");
+    modalBeerImg.src = "static/" + beerType.label;
+
+    const modalBeerCategory = document.querySelector(".modal-category");
+    modalBeerCategory.textContent = beerType.category;
+
+    const modalBeerAlc = document.querySelector(".modal-alc");
+    modalBeerAlc.textContent = beerType.alc + "%";
+
+    const modalBeerImpression = document.querySelector(".modal-description");
+    modalBeerImpression.textContent = beerType.description.overAllImpression;
+
     const body = document.querySelector("body");
     body.classList.add("modalopen");
     const exit = document.querySelector(".exit");
