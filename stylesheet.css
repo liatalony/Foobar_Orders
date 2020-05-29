@@ -465,23 +465,23 @@ label .field.is-focused + span {
 
 .modalcontainer {
   margin-top: 20vh;
-  margin: 25vh 2vh 25vh 2vh;
-  background-color: var(--white);
-  height: 50vh;
+  margin: 15vh 2vh 15vh 2vh;
+  background-color: rgba(255, 255, 255, 0.9);
+  height: 70vh;
 }
 
 .modalcontent {
-  background-color: var(--white);
+  background-color: transparent;
   color: var(--blue);
   margin: 15% auto;
   padding: 15px;
   width: 90%;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 /* Exit from MODAL */
 .exit {
-  color: #333333;
+  color: var(--blue);
   float: right;
   font-size: 40px;
   font-weight: bold;
@@ -489,7 +489,7 @@ label .field.is-focused + span {
 
 .exit:hover,
 .exit:focus {
-  color: #000;
+  color: var(--orange);
   text-decoration: none;
   cursor: pointer;
 }
@@ -504,10 +504,10 @@ label .field.is-focused + span {
   padding-bottom: 10px;
 }
 
-.modal-category {
+.modal-headlines {
   padding-bottom: 10px;
 }
 
-.modal-alc {
-  padding-bottom: 10px;
+.beer-impression {
+  padding-top: 20px;
 }
