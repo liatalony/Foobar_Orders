@@ -46,7 +46,9 @@ const beerInfo = {
   amount: 0,
 };
 cart.addEventListener("click", slideRight);
+document.querySelector(".test").addEventListener("click", slideRight);
 
+document.querySelector;
 goToPayment.addEventListener("click", slideRight);
 prev.forEach(function (button) {
   button.addEventListener("click", slideLeft);
@@ -240,6 +242,7 @@ function sendOrder() {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
+      document.querySelector(".order-number").textContent = data.id;
       document.querySelectorAll(".order-page input").forEach((e) => {
         e.value = 0;
       });

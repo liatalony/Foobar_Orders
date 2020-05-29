@@ -497,3 +497,23 @@ label .field.is-focused + span {
   color: var(--blue);
   font-size: 40px;
 }
+
+/*---------------- <RECIPT> ----------------*/
+.recipt {
+  text-align: center;
+  padding-top: 100px;
+}
+
+.recipt h1 {
+  font-size: var(--big-headline-size);
+}
+
+.recipt .order-number-intro {
+  margin-top: 20vh;
+}
+
+.recipt .order-number {
+  font-size: 70px;
+  font-weight: bold;
+}
+/*---------------- </RECIPT> ----------------*/
