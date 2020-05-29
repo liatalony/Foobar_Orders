@@ -466,13 +466,13 @@ label .field.is-focused + span {
 .modalcontainer {
   margin-top: 20vh;
   margin: 15vh 2vh 15vh 2vh;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(10, 20, 45, 0.9);
   height: 70vh;
 }
 
 .modalcontent {
   background-color: transparent;
-  color: var(--blue);
+  color: var(--text-color);
   margin: 15% auto;
   padding: 15px;
   width: 90%;
@@ -481,7 +481,7 @@ label .field.is-focused + span {
 
 /* Exit from MODAL */
 .exit {
-  color: var(--blue);
+  color: var(--text-color);
   float: right;
   font-size: 40px;
   font-weight: bold;

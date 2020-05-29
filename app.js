@@ -122,6 +122,7 @@ function makeBeer(beer) {
         const beerorder = Object.create(beerInfo); // create a new beerInfo object
         beerorder.beerName = beer.beer; //append beer name
         beerorder.amount++; // append beer amount
+        beerorder.price = beer.price;
 
         beerCart.push(beerorder); // add the beer to the cart
       } else {
@@ -212,6 +213,7 @@ function updateCart() {
   numOfOrders.textContent = totalAmount;
 
   console.log(beerCart);
+  document.querySelector(".items").innerHTML = "";
   beerCart.forEach((x) => displayCart(x));
 }
 //Make the Your Order Page dynamic - Viki
@@ -220,9 +222,14 @@ function displayCart(beer) {
   const templateOrderCopy = document.querySelector(".your-order-template").content.cloneNode(true); // copying the template
   templateOrderCopy.querySelector(".your-beer").textContent = beer.beerName; //beer name
 
-  const inputField = templateOrderCopy.querySelector("input"); // number of beer
+  const inputField = templateOrderCopy.querySelector(".amount-of-beer"); // number of beer
+  inputField.value = beer.amount;
+
+  const amountOfBeer = templateOrderCopy.querySelector(".current-amount");
+  console.log(amountOfBeer);
+  amountOfBeer.textContent = `${beer.amount} X ${35},-`;
   const plus = templateOrderCopy.querySelector(".more"); // plus button
-  const minus = templateOrderCopy.querySelector(".less"); // minus button
+  const minus = templateOrderCopy.querySelector(".less"); // minus button[]
 
   plus.addEventListener("click", function (event) {
     // add beer to cart by clicking plus
@@ -232,11 +239,11 @@ function displayCart(beer) {
       //event.preventDefault();
       const currentValue = Number(inputField.value); // the current number thats in the input
       inputField.value = currentValue + 1; // add 1 to that number
-      const beerCheck = beerCart.filter((Object) => Object.beerName == beer.beer); // check if this beer already exists in the cart
+      const beerCheck = beerCart.filter((Object) => Object.beerName == beer.beerName); // check if this beer already exists in the cart
       if (beerCheck.length == 0) {
         // if beer does not exist in the cart
         const beerorder = Object.create(beerInfo); // create a new beerInfo object
-        beerorder.beerName = beer.beer; //append beer name
+        beerorder.beerName = beer.beerName; //append beer name
         beerorder.amount++; // append beer amount
 
         beerCart.push(beerorder); // add the beer to the cart
@@ -244,7 +251,7 @@ function displayCart(beer) {
         // if  beer does exist in cart
         beerCart.map((Object) => {
           //get the object of that beer from the cart
-          if (Object.beerName == beer.beer) {
+          if (Object.beerName == beer.beerName) {
             Object.amount++; // update the amount of that beer
           }
         });
@@ -261,7 +268,7 @@ function displayCart(beer) {
       inputField.value = currentValue - 1; // remove one beer from that current number
       beerCart.map((Object) => {
         //get the beer order from the cart
-        if (Object.beerName == beer.beer) {
+        if (Object.beerName == beer.beerName) {
           if (Object.amount == 1) {
             // if the number of beers on the order is 1 -  remove the object from the cart
             beerCart.splice(Object, 1);
@@ -275,6 +282,7 @@ function displayCart(beer) {
       updateCart(); // update the number shown on the cart
     }
   });
+  document.querySelector(".items").appendChild(templateOrderCopy);
 }
 
 ///////Andy////////
