@@ -215,8 +215,11 @@ function updateCart() {
   }
   numOfOrders.textContent = totalAmount;
 
-  const totalAmountText = document.querySelector("#total-number-of-beers"); //display total amount of beers
+  const totalAmountText = document.querySelector("#total-beers-top"); //display total amount of beers on the top
   totalAmountText.innerHTML = `${totalAmount} Items`;
+
+  const totalAmountBottomText = document.querySelector("#total-beers-bottom"); //display total amount of beers on the bottom
+  totalAmountBottomText.innerHTML = `Total (${totalAmount})`;
 
   var totalPrice = beerCart.map((a) => a.price * a.amount).reduce((a, b) => a + b, 0); //Calculate the total price of the cart
   const finalPriceText = document.querySelector("#final-price"); //display total amount of beers
