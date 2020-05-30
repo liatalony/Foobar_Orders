@@ -93,10 +93,12 @@ const beerInfo = {
   //the object for each type of ordered beer
   beerName: "",
   amount: 0,
+  tapId: 0,
   price: 35,
 };
 
 function makeBeer(beer) {
+  // Beer is TAP!!
   // append all the beers on tap in the html with the right data
   const templateCopy = document.querySelector(".order-page-template").content.cloneNode(true); // copying the template
   templateCopy.querySelector(".beer-name").textContent = beer.beer; //beer name
@@ -105,6 +107,7 @@ function makeBeer(beer) {
   beerLogo.src = `static/beer-logos/${beer.beer.replace(/\s/g, "").toLowerCase()}.png`; //beer img src
 
   const inputField = templateCopy.querySelector("input"); // number of beer
+  inputField.id = `tap-${beer.id}-amount-input`; //generate id for tap input field
   const plus = templateCopy.querySelector(".more"); // plus button
   const minus = templateCopy.querySelector(".less"); // minus button
 
@@ -122,8 +125,8 @@ function makeBeer(beer) {
         const beerorder = Object.create(beerInfo); // create a new beerInfo object
         beerorder.beerName = beer.beer; //append beer name
         beerorder.amount++; // append beer amount
-        beerorder.price = beer.price;
-
+        beerorder.price = 35;
+        beerorder.tapId = beer.id;
         beerCart.push(beerorder); // add the beer to the cart
       } else {
         // if  beer does exist in cart
@@ -212,6 +215,13 @@ function updateCart() {
   }
   numOfOrders.textContent = totalAmount;
 
+  const totalAmountText = document.querySelector("#total-number-of-beers"); //display total amount of beers
+  totalAmountText.innerHTML = `${totalAmount} Items`;
+
+  var totalPrice = beerCart.map((a) => a.price * a.amount).reduce((a, b) => a + b, 0); //Calculate the total price of the cart
+  const finalPriceText = document.querySelector("#final-price"); //display total amount of beers
+  finalPriceText.textContent = `${totalPrice} DKK`;
+
   console.log(beerCart);
   document.querySelector(".items").innerHTML = "";
   beerCart.forEach((x) => displayCart(x));
@@ -245,7 +255,7 @@ function displayCart(beer) {
         const beerorder = Object.create(beerInfo); // create a new beerInfo object
         beerorder.beerName = beer.beerName; //append beer name
         beerorder.amount++; // append beer amount
-
+        beerorder.tapId = beer.tapId; // id of tap
         beerCart.push(beerorder); // add the beer to the cart
       } else {
         // if  beer does exist in cart
@@ -253,6 +263,7 @@ function displayCart(beer) {
           //get the object of that beer from the cart
           if (Object.beerName == beer.beerName) {
             Object.amount++; // update the amount of that beer
+            document.querySelector(`#tap-${beer.tapId}-amount-input`).value = Object.amount;
           }
         });
       }
@@ -272,9 +283,11 @@ function displayCart(beer) {
           if (Object.amount == 1) {
             // if the number of beers on the order is 1 -  remove the object from the cart
             beerCart.splice(Object, 1);
+            document.querySelector(`#tap-${beer.tapId}-amount-input`).value = Object.amount;
           } else {
             // if theres more than 1 beer
             Object.amount--; // remove 1
+            document.querySelector(`#tap-${beer.tapId}-amount-input`).value = Object.amount;
           }
         }
       });
