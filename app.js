@@ -173,12 +173,12 @@ function makeBeer(beer) {
       event.preventDefault();
       const currentValue = Number(inputField.value); // current beer number
       inputField.value = currentValue - 1; // remove one beer from that current number
-      beerCart.map((Object) => {
+      beerCart.map((Object, index) => {
         //get the beer order from the cart
         if (Object.name == beer.beer) {
           if (Object.amount == 1) {
             // if the number of beers on the order is 1 -  remove the object from the cart
-            beerCart.splice(Object, 1);
+            beerCart.splice(index, 1);
           } else {
             // if theres more than 1 beer
             Object.amount--; // remove 1
@@ -309,12 +309,12 @@ function displayCart(beer) {
       event.preventDefault();
       const currentValue = Number(inputField.value); // current beer number
       inputField.value = currentValue - 1; // remove one beer from that current number
-      beerCart.map((Object) => {
+      beerCart.map((Object, index) => {
         //get the beer order from the cart
         if (Object.name == beer.name) {
           if (Object.amount == 1) {
             // if the number of beers on the order is 1 -  remove the object from the cart
-            beerCart.splice(Object, 1);
+            beerCart.splice(index, 1);
             document.querySelector(`#tap-${beer.tapId}-amount-input`).value = 0;
           } else {
             // if theres more than 1 beer
