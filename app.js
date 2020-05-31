@@ -1,6 +1,8 @@
 window.addEventListener("DOMContentLoaded", init);
 const theme = document.querySelector("#checkbox");
 
+var beerArray = [];
+
 function init() {
   let themeCheck = localStorage.getItem("theme-color"); // checking what the selected theme is in the local storage
   if (themeCheck == "light") {
@@ -15,17 +17,11 @@ function init() {
       console.log(e.taps);
       e.taps.forEach(makeBeer); //only sending th tap list
     });
-  // fetch("https://foobar-squad.herokuapp.com/beertypes")
-  //   .then((res) => res.json())
-  //   .then(makeBeer);
-
-  // const beerArray = [];
-
-  //   function prepareObjects(jsonData) {
-  //   beerArray = jsonData.map(preapareObject);
-
-  //   displayList(beerArray);
-  // }
+  fetch("https://foobar-squad.herokuapp.com/beertypes")
+    .then((res) => res.json())
+    .then(function (res) {
+      beerArray = res;
+    });
 
   //addToCartDisabled();
 
@@ -106,7 +102,20 @@ function slideLeft() {
   }
 }
 
+<<<<<<< HEAD
+=======
+const beerCart = []; // Array to save all the ordered beers
+const beerInfo = {
+  //the object for each type of ordered beer
+  beerName: "",
+  amount: 0,
+  tapId: 0,
+  price: 35,
+};
+
+>>>>>>> vikisBranch
 function makeBeer(beer) {
+  // Beer is TAP!!
   // append all the beers on tap in the html with the right data
   const templateCopy = document.querySelector(".order-page-template").content.cloneNode(true); // copying the template
   const inputField = templateCopy.querySelector("input"); // number of beer
@@ -116,6 +125,7 @@ function makeBeer(beer) {
 
   templateCopy.querySelector(".beer-name").textContent = beer.beer; //beer name
   templateCopy.querySelector(".storage span").textContent = beer.level / 50 + " "; // number of beer cups left
+<<<<<<< HEAD
   beerLogo.src = `beer-logos/${beer.beer.replace(/\s/g, "").toLowerCase()}.png`; //beer img src
 
   inputField.addEventListener("input", (event) => {
@@ -148,6 +158,15 @@ function makeBeer(beer) {
       updateCart();
     }
   });
+=======
+  const beerLogo = templateCopy.querySelector(".beer-logo"); // beer img
+  beerLogo.src = `static/beer-logos/${beer.beer.replace(/\s/g, "").toLowerCase()}.png`; //beer img src
+
+  const inputField = templateCopy.querySelector("input"); // number of beer
+  inputField.id = `tap-${beer.id}-amount-input`; //generate id for tap input field
+  const plus = templateCopy.querySelector(".more"); // plus button
+  const minus = templateCopy.querySelector(".less"); // minus button
+>>>>>>> vikisBranch
 
   plus.addEventListener("click", function (event) {
     // add beer to cart by clicking plus
@@ -163,7 +182,8 @@ function makeBeer(beer) {
         const beerorder = Object.create(beerInfo); // create a new beerInfo object
         beerorder.name = beer.beer; //append beer name
         beerorder.amount++; // append beer amount
-
+        beerorder.price = 35;
+        beerorder.tapId = beer.id;
         beerCart.push(beerorder); // add the beer to the cart
       } else {
         // if  beer does exist in cart
@@ -200,6 +220,41 @@ function makeBeer(beer) {
       updateCart(); // update the number shown on the cart
     }
   });
+
+  //Creating modal for each beer description - Viki //
+
+  // const article = templateCopy.querySelector(".name-desc-storage");
+  templateCopy.querySelector(".read-more-btn").addEventListener("click", function () {
+    var element = document.querySelector(".modalcontainer");
+    const modal = document.querySelector(".modalbg");
+    modal.style.display = "block";
+
+    const modalBeerName = document.querySelector(".modal-beername");
+    var beerType = beerArray.find((x) => x.name == beer.beer);
+    modalBeerName.textContent = beerType.name;
+
+    const modalBeerImg = document.querySelector(".modal-img");
+    modalBeerImg.src = "static/beer-logos/" + beerType.label;
+
+    const modalBeerCategory = document.querySelector(".modal-category");
+    modalBeerCategory.textContent = beerType.category;
+
+    const modalBeerAlc = document.querySelector(".modal-alc");
+    modalBeerAlc.textContent = "Alcohol: " + beerType.alc + "%";
+
+    const modalBeerImpression = document.querySelector(".modal-description");
+    modalBeerImpression.textContent = beerType.description.overallImpression;
+
+    const body = document.querySelector("body");
+    body.classList.add("modalopen");
+    const exit = document.querySelector(".exit");
+    exit.addEventListener("click", function () {
+      modal.style.display = "none";
+      body.classList.remove("modalopen");
+      element.classList.remove(...element.classList);
+      element.classList.add("modalcontainer");
+    });
+  });
   document.querySelector(".beers").appendChild(templateCopy); // append the beer information in the HTML
 }
 
@@ -220,7 +275,90 @@ function updateCart() {
   }
   numOfOrders.textContent = totalAmount;
 
+  const totalAmountText = document.querySelector("#total-beers-top"); //display total amount of beers on the top
+  totalAmountText.innerHTML = `${totalAmount} Items`;
+
+  const totalAmountBottomText = document.querySelector("#total-beers-bottom"); //display total amount of beers on the bottom
+  totalAmountBottomText.innerHTML = `Total (${totalAmount})`;
+
+  var totalPrice = beerCart.map((a) => a.price * a.amount).reduce((a, b) => a + b, 0); //Calculate the total price of the cart
+  const finalPriceText = document.querySelector("#final-price"); //display total amount of beers
+  finalPriceText.textContent = `${totalPrice} DKK`;
+
   console.log(beerCart);
+  document.querySelector(".items").innerHTML = "";
+  beerCart.forEach((x) => displayCart(x));
+}
+//Make the Your Order Page dynamic - Viki
+
+function displayCart(beer) {
+  const templateOrderCopy = document.querySelector(".your-order-template").content.cloneNode(true); // copying the template
+  templateOrderCopy.querySelector(".your-beer").textContent = beer.beerName; //beer name
+
+  const inputField = templateOrderCopy.querySelector(".amount-of-beer"); // number of beer
+  inputField.value = beer.amount;
+
+  const amountOfBeer = templateOrderCopy.querySelector(".current-amount");
+  console.log(amountOfBeer);
+  amountOfBeer.textContent = `${beer.amount} X ${35},-`;
+  const plus = templateOrderCopy.querySelector(".more"); // plus button
+  const minus = templateOrderCopy.querySelector(".less"); // minus button[]
+
+  plus.addEventListener("click", function (event) {
+    // add beer to cart by clicking plus
+    numOfOrders.classList.remove("hidden"); // show number of beers in cart
+    if (inputField.value < 99) {
+      // theres a maximum of 99 beers of each type that can be ordered
+      //event.preventDefault();
+      const currentValue = Number(inputField.value); // the current number thats in the input
+      inputField.value = currentValue + 1; // add 1 to that number
+      const beerCheck = beerCart.filter((Object) => Object.beerName == beer.beerName); // check if this beer already exists in the cart
+      if (beerCheck.length == 0) {
+        // if beer does not exist in the cart
+        const beerorder = Object.create(beerInfo); // create a new beerInfo object
+        beerorder.beerName = beer.beerName; //append beer name
+        beerorder.amount++; // append beer amount
+        beerorder.tapId = beer.tapId; // id of tap
+        beerCart.push(beerorder); // add the beer to the cart
+      } else {
+        // if  beer does exist in cart
+        beerCart.map((Object) => {
+          //get the object of that beer from the cart
+          if (Object.beerName == beer.beerName) {
+            Object.amount++; // update the amount of that beer
+            document.querySelector(`#tap-${beer.tapId}-amount-input`).value = Object.amount;
+          }
+        });
+      }
+      updateCart(); // update the number shown on the cart
+    }
+  });
+  minus.addEventListener("click", function (event) {
+    // remove beer from the cart by clicking minus
+    if (inputField.value > 0) {
+      // prevents the number of beers to be under 0
+      event.preventDefault();
+      const currentValue = Number(inputField.value); // current beer number
+      inputField.value = currentValue - 1; // remove one beer from that current number
+      beerCart.map((Object) => {
+        //get the beer order from the cart
+        if (Object.beerName == beer.beerName) {
+          if (Object.amount == 1) {
+            // if the number of beers on the order is 1 -  remove the object from the cart
+            beerCart.splice(Object, 1);
+            document.querySelector(`#tap-${beer.tapId}-amount-input`).value = 0;
+          } else {
+            // if theres more than 1 beer
+            Object.amount--; // remove 1
+            document.querySelector(`#tap-${beer.tapId}-amount-input`).value = Object.amount;
+          }
+        }
+      });
+
+      updateCart(); // update the number shown on the cart
+    }
+  });
+  document.querySelector(".items").appendChild(templateOrderCopy);
 }
 
 // ---------------- <POST> ------------------------
@@ -318,29 +456,8 @@ function setOutcome(result) {
     errorElement.textContent = result.error.message;
     errorElement.classList.add("visible");
   }
-  const templateCopy = document.querySelector(".order-page-template").content.cloneNode(true);
-  templateCopy.querySelector(".beer-name").textContent = beer.beer;
-
-  //Creating modal for each beer description //
-  const article = templateCopy.querySelector("article");
-  article.addEventListener("click", function () {
-    var element = document.querySelector(".modalcontainer");
-    const modal = document.querySelector(".modalbg");
-    modal.style.display = "block";
-    const modalBeerName = document.querySelector(".modal-beername");
-    modalBeerName.textContent = beer.beer;
-    const body = document.querySelector("body");
-    body.classList.add("modalopen");
-    const exit = document.querySelector(".exit");
-    exit.addEventListener("click", function () {
-      modal.style.display = "none";
-      body.classList.remove("modalopen");
-      element.classList.remove(...element.classList);
-      element.classList.add("modalcontainer");
-    });
-  });
-
-  document.querySelector(".beers").appendChild(templateCopy);
+  // const templateCopy = document.querySelector(".order-page-template").content.cloneNode(true);
+  // templateCopy.querySelector(".beer-name").textContent = beer.beer;
 }
 
 card.on("change", function (event) {

@@ -41,7 +41,11 @@
                 <div class="modalcontainer">
                   <div class="modalcontent">
                     <p class="exit">&times;</p>
-                    <h2 class="modal-beername">Beer Name</h2>
+                    <h2 class="modal-beername modal-headlines"></h2>
+                    <h3 class="modal-category modal-headlines"></h3>
+                    <img src="" alt="" class="modal-img">  
+                    <h3 class="modal-alc modal-headlines"></h3>
+                    <h3 class="beer-impression modal-headlines">Overall Impression</h3>
                     <p class="modal-description"></p>
                   </div>
                 </div>
@@ -50,61 +54,43 @@
           </div>
 
         </section>
+
         <section class="your-order-page">
+           
           <a class="previous">&#10094;</a>
           <div class="description-title">
             <h2 class="orange-titles">Your Order</h2>
-            <h3 class="white-titles">4 Items</h3>
+            <h3 class="white-titles" id="total-beers-top"></h3>
           </div>
-
-          <div class="section">
-            <h3 class="white-titles">Fairy Tale Ale</h3>
-            <div class="row">
-              <h4 class="orange-delete">Delete</h4>
-              <section class="amount">
-                <button class="less">-</button>
-                <input id="number" class="number" type="text" value="0" size="2" />
-                <button class="more">+</button>
-              </section>
-              <h3 class="white-titles">1 X 35,-</h3>
-            </div>
+          <div class="items">
           </div>
-
-          <div class="section">
-            <h3 class="white-titles">El Hefe</h3>
-            <div class="row">
-              <h4 class="orange-delete">Delete</h4>
-              <section class="amount">
-                <button class="less">-</button>
-                <input id="number" class="number" type="text" value="0" size="2" />
-                <button class="more">+</button>
-              </section>
-              <h3 class="white-titles">1 X 35,-</h3>
-            </div>
-          </div>
-
-          <div class="section">
-            <h3 class="white-titles">Ruined Childhood</h3>
-            <div class="row">
-              <h4 class="orange-delete">Delete</h4>
-              <section class="amount">
-                <button class="less">-</button>
-                <input id="number" class="number" type="text" value="0" size="2" />
-                <button class="more">+</button>
-              </section>
-              <h3 class="white-titles">2 X 35,-</h3>
-            </div>
-          </div>
-
           <div class="description-total">
-            <h3 class="white-titles">Total (4 Items):</h3>
-            <h3 class="white-titles">140 DKK</h3>
+            <h3 class="white-titles" id="total-beers-bottom"></h3>
+            <h3 class="white-titles" id="final-price"></h3>
           </div>
-
+  
           <div class="proceed-button">
             <button class="proceed">Proceed</button>
           </div>
         </section>
+        <template class="your-order-template"> 
+          <div class="section">
+            <h3 class="white-titles your-beer">Fairy Tale Ale</h3>
+            <div class="row">
+              <h4 class="orange-delete">Delete</h4>
+                <section class="amount">
+              <button class="less">-</button>
+              <input class="number amount-of-beer" type="text" value="0" size="2" />
+              <button class="more">+</button>
+            </section>
+              <h3 class="white-titles current-amount">1 X 35,-</h3>
+            </div>
+          </div>
+            
+        </template>
+     </section> 
+     <!-- End of your order page -->
+        
         <section class="payment-info">
           <a class="previous">&#10094;</a>
 
@@ -149,8 +135,8 @@
         </section>
         <section class="name-desc-storage">
           <h2 class="beer-name">Beer Name</h2>
-          <p class="beer-desc">The description of the beer</p>
-          <p class="storage"><span>30</span><img class="small-beer" src="static/SVG FooBar/beer.svg" alt="beer" > left in keg</p>
+          <p class="read-more-btn">Read more</p>
+      
         </section>
         <section class="input-add">
           <section class="amount">
@@ -158,19 +144,10 @@
             <input class="number" type="text" value="0" maxlength="2" />
             <button class="more">+</button>
           </section>
-          <button class="add-to-cart" disabled>Add to cart</button>
+          <p class="storage"><span>30</span><img class="small-beer" src="static/SVG FooBar/beer.svg" alt="beer" > left in keg</p>
+         
         </section>
       </article>
-    </template>
-    <template class="your-order-template">
-      <div class="section">
-        <h3 class="white-titles">Fairy Tale Ale</h3>
-        <div class="row">
-          <h4 class="orange-delete">Delete</h4>
-          <plus-minus-button></plus-minus-button>
-          <h3 class="white-titles">1 X 35,-</h3>
-        </div>
-      </div>
     </template>
     </main>
   </body>
