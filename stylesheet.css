@@ -74,7 +74,9 @@ main > section {
   width: 100vw;
   overflow: auto;
 }
-
+.welcome {
+  background-image: url(static/29440531895_09f8f7f78c_k.jpg);
+}
 header {
   background-color: var(--blue);
   width: 100vw;

@@ -10,7 +10,7 @@
   </head>
   <body>
     <div class="wrapper">
-      <header>
+      <header class="hidden"> 
         <section class="color-theme">
           <img src="static/moon.png" alt="dark" class="dark" />
           <label class="switch" for="checkbox">
@@ -26,7 +26,7 @@
         </section>
       </header>
       <main>
-        <section class="welcome"></section>
+        <section id="bm" class="welcome"></section>
         <section class="order-page">
           <section class="filters">
             <button class="filter all filter-active">All</button>
@@ -117,7 +117,7 @@
           <button type="submit">Pay</button>
           <div class="outcome">
             <div class="error" role="alert"></div>
-            <div class="success">Success! Your Stripe token is <span class="token"></span></div>
+  
           </div>
         </form>
         </section>
@@ -152,5 +152,6 @@
     </template>
     </main>
   </body>
+  <script src="lottie.js" type="text/javascript"></script>
   <script src="app.js"></script>
 </html>

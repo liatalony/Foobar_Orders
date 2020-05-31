@@ -1,3 +1,4 @@
+import lottie from "./lottie";
 window.addEventListener("DOMContentLoaded", init);
 const theme = document.querySelector("#checkbox");
 
@@ -24,6 +25,18 @@ function init() {
     });
 
   // eventListeners for the sliders
+  ////// Lottie /////
+  let animation = lottie.loadAnimation({
+    container: document.getElementById("bm"),
+    renderer: "svg",
+    loop: false,
+    autoplay: true,
+    path: "data.json",
+  });
+  setTimeout(() => {
+    document.querySelector("header").classList.remove("hidden");
+    slideRight();
+  }, 6000);
 }
 
 const cart = document.querySelector(".cart"); //cart button
@@ -52,7 +65,7 @@ function disableLightMode() {
 }
 function changeTheme() {
   // clicking eventListener to cahnge the color theme
-  lightMode = localStorage.getItem("theme-color"); // get the data in local storage
+  let themeCheck = localStorage.getItem("theme-color"); // get the data in local storage
   if (theme.checked == true) {
     // if checkbox is checked
     enableLightMode(); // change to light Mode
@@ -65,11 +78,16 @@ function changeTheme() {
 
 let counter = 0;
 function slideRight() {
-  if (beerCart.length !== 0) {
+  if (counter > 0) {
+    if (beerCart.length !== 0) {
+      counter++;
+      document.querySelector("main").style.transform = "translateX(" + -100 * counter + "vw)"; //move to this point
+      cart.removeEventListener("click", slideRight);
+      document.querySelector(".go-to-cart").style.opacity = "0";
+    }
+  } else {
     counter++;
-    document.querySelector("main").style.transform = "translateX(" + -100 * counter + "vw)"; //move to this point
-    cart.removeEventListener("click", slideRight);
-    document.querySelector(".go-to-cart").style.opacity = "0";
+    document.querySelector("main").style.transform = "translateX(" + -100 * counter + "vw)";
   }
 }
 
@@ -413,16 +431,13 @@ Array.prototype.forEach.call(inputs, function (input) {
 });
 
 function setOutcome(result) {
-  var successElement = document.querySelector(".success");
-  var errorElement = document.querySelector(".error");
-  successElement.classList.remove("visible");
+  let errorElement = document.querySelector(".error");
   errorElement.classList.remove("visible");
 
   if (result.token) {
     // Use the token to create a charge or a customer
     // https://stripe.com/docs/payments/charges-api
-    successElement.querySelector(".token").textContent = result.token.id;
-    successElement.classList.add("visible");
+
     sendOrder();
     slideRight();
   } else if (result.error) {
