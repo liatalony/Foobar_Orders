@@ -203,7 +203,7 @@ function makeBeer(beer) {
     modalBeerName.textContent = beerType.name;
 
     const modalBeerImg = document.querySelector(".modal-img");
-    modalBeerImg.src = "static/beer-logos/" + beerType.label;
+    modalBeerImg.src = "beer-logos/" + beerType.label;
 
     const modalBeerCategory = document.querySelector(".modal-category");
     modalBeerCategory.textContent = beerType.category;
@@ -262,7 +262,7 @@ function updateCart() {
 
 function displayCart(beer) {
   const templateOrderCopy = document.querySelector(".your-order-template").content.cloneNode(true); // copying the template
-  templateOrderCopy.querySelector(".your-beer").textContent = beer.beerName; //beer name
+  templateOrderCopy.querySelector(".your-beer").textContent = beer.name; //beer name
 
   const inputField = templateOrderCopy.querySelector(".amount-of-beer"); // number of beer
   inputField.value = beer.amount;
@@ -281,11 +281,11 @@ function displayCart(beer) {
       //event.preventDefault();
       const currentValue = Number(inputField.value); // the current number thats in the input
       inputField.value = currentValue + 1; // add 1 to that number
-      const beerCheck = beerCart.filter((Object) => Object.beerName == beer.beerName); // check if this beer already exists in the cart
+      const beerCheck = beerCart.filter((Object) => Object.name == beer.name); // check if this beer already exists in the cart
       if (beerCheck.length == 0) {
         // if beer does not exist in the cart
         const beerorder = Object.create(beerInfo); // create a new beerInfo object
-        beerorder.beerName = beer.beerName; //append beer name
+        beerorder.name = beer.name; //append beer name
         beerorder.amount++; // append beer amount
         beerorder.tapId = beer.tapId; // id of tap
         beerCart.push(beerorder); // add the beer to the cart
@@ -293,7 +293,7 @@ function displayCart(beer) {
         // if  beer does exist in cart
         beerCart.map((Object) => {
           //get the object of that beer from the cart
-          if (Object.beerName == beer.beerName) {
+          if (Object.name == beer.name) {
             Object.amount++; // update the amount of that beer
             document.querySelector(`#tap-${beer.tapId}-amount-input`).value = Object.amount;
           }
@@ -311,7 +311,7 @@ function displayCart(beer) {
       inputField.value = currentValue - 1; // remove one beer from that current number
       beerCart.map((Object) => {
         //get the beer order from the cart
-        if (Object.beerName == beer.beerName) {
+        if (Object.name == beer.name) {
           if (Object.amount == 1) {
             // if the number of beers on the order is 1 -  remove the object from the cart
             beerCart.splice(Object, 1);
