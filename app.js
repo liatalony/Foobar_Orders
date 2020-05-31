@@ -164,9 +164,10 @@ function makeBeer(beer) {
     }
   });
 
-  //Creating modal for each beer description //
-  const article = templateCopy.querySelector("article");
-  article.addEventListener("click", function () {
+  //Creating modal for each beer description - Viki //
+
+  // const article = templateCopy.querySelector(".name-desc-storage");
+  templateCopy.querySelector(".read-more-btn").addEventListener("click", function () {
     var element = document.querySelector(".modalcontainer");
     const modal = document.querySelector(".modalbg");
     modal.style.display = "block";
@@ -286,7 +287,7 @@ function displayCart(beer) {
           if (Object.amount == 1) {
             // if the number of beers on the order is 1 -  remove the object from the cart
             beerCart.splice(Object, 1);
-            document.querySelector(`#tap-${beer.tapId}-amount-input`).value = Object.amount;
+            document.querySelector(`#tap-${beer.tapId}-amount-input`).value = 0;
           } else {
             // if theres more than 1 beer
             Object.amount--; // remove 1
