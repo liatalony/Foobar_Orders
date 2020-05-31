@@ -23,10 +23,6 @@ function init() {
       beerArray = res;
     });
 
-  //addToCartDisabled();
-
-  //input.addEventListener("keydown", addToCartDisabled);
-
   // eventListeners for the sliders
 }
 
@@ -35,14 +31,7 @@ let numOfOrders = document.querySelector(".number-of-orders"); // number of orde
 const goToPayment = document.querySelector(".proceed"); // procceed button in "your order" page
 const prev = document.querySelectorAll(".previous"); // back arrows to slide back
 
-const beerCart = []; // Array to save all the ordered beers
-const beerInfo = {
-  //the object for each type of ordered beer
-  name: "",
-  amount: 0,
-};
 cart.addEventListener("click", slideRight);
-document.querySelector(".test").addEventListener("click", slideRight);
 
 document.querySelector;
 goToPayment.addEventListener("click", slideRight);
@@ -74,14 +63,6 @@ function changeTheme() {
 }
 // ----------------- </THEME SWITCHER> ------------------
 
-function addToCartDisabled() {
-  if (amount > 0) {
-    addToCart.disabled = false;
-  } else {
-    addToCart.disabled = true;
-  }
-}
-
 let counter = 0;
 function slideRight() {
   if (beerCart.length !== 0) {
@@ -105,7 +86,7 @@ function slideLeft() {
 const beerCart = []; // Array to save all the ordered beers
 const beerInfo = {
   //the object for each type of ordered beer
-  beerName: "",
+  name: "",
   amount: 0,
   tapId: 0,
   price: 35,
@@ -119,6 +100,7 @@ function makeBeer(beer) {
   const plus = templateCopy.querySelector(".more"); // plus button
   const minus = templateCopy.querySelector(".less"); // minus button
   const beerLogo = templateCopy.querySelector(".beer-logo"); // beer img
+  inputField.id = `tap-${beer.id}-amount-input`; //generate id for tap input field
 
   templateCopy.querySelector(".beer-name").textContent = beer.beer; //beer name
   templateCopy.querySelector(".storage span").textContent = beer.level / 50 + " "; // number of beer cups left
@@ -154,13 +136,6 @@ function makeBeer(beer) {
       updateCart();
     }
   });
-  const beerLogo = templateCopy.querySelector(".beer-logo"); // beer img
-  beerLogo.src = `static/beer-logos/${beer.beer.replace(/\s/g, "").toLowerCase()}.png`; //beer img src
-
-  const inputField = templateCopy.querySelector("input"); // number of beer
-  inputField.id = `tap-${beer.id}-amount-input`; //generate id for tap input field
-  const plus = templateCopy.querySelector(".more"); // plus button
-  const minus = templateCopy.querySelector(".less"); // minus button
 
   plus.addEventListener("click", function (event) {
     // add beer to cart by clicking plus
@@ -363,7 +338,9 @@ btn.addEventListener("click", sendOrder);
 function sendOrder() {
   console.log("sending...");
 
-  const order = JSON.stringify(beerCart);
+  let beerCartToPost = beerCart.map((a) => ({ name: a.name, amount: a.amount }));
+  const order = JSON.stringify(beerCartToPost);
+  console.log(beerCartToPost);
   fetch("https://foobar-squad.herokuapp.com/order", {
     method: "post",
     headers: {
@@ -450,8 +427,6 @@ function setOutcome(result) {
     errorElement.textContent = result.error.message;
     errorElement.classList.add("visible");
   }
-  // const templateCopy = document.querySelector(".order-page-template").content.cloneNode(true);
-  // templateCopy.querySelector(".beer-name").textContent = beer.beer;
 }
 
 card.on("change", function (event) {
