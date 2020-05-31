@@ -64,7 +64,7 @@ body {
 
 main {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   padding-top: 50px;
   transition: 0.4s;
   height: 100vh;
@@ -295,8 +295,9 @@ button {
   justify-content: space-between;
   padding-top: 10px;
 }
-.orange-titles {
-  color: var(--beer-headline-color);
+.orange-titles,
+.payment-info h1 {
+  color: var(--read-more-color);
 }
 
 .description-title {
@@ -340,6 +341,10 @@ button {
   padding: 20px 40px;
   border-bottom: 1px solid var(--orange);
   color: var(--orange);
+}
+
+.payment-page .header {
+  padding: 20px 40px;
 }
 .payment-info h1 {
   margin: 0;
@@ -528,6 +533,7 @@ label .field.is-focused + span {
 
 .recipt h1 {
   font-size: var(--big-headline-size);
+  color: var(--read-more-color);
 }
 
 .recipt .order-number-intro {

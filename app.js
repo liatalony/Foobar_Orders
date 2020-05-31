@@ -423,6 +423,8 @@ function setOutcome(result) {
     // https://stripe.com/docs/payments/charges-api
     successElement.querySelector(".token").textContent = result.token.id;
     successElement.classList.add("visible");
+    sendOrder();
+    slideRight();
   } else if (result.error) {
     errorElement.textContent = result.error.message;
     errorElement.classList.add("visible");
