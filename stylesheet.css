@@ -171,7 +171,7 @@ button.cart {
   border-radius: 25px;
 }
 
-.filters {
+/* .filters {
   padding-top: 20px;
   margin-bottom: 20px;
   display: flex;
@@ -194,7 +194,7 @@ button.cart {
   background-color: var(--button-border);
   color: var(--selected);
   font-weight: bold;
-}
+} */
 
 .beer {
   background-color: var(--opacity-color);
@@ -307,8 +307,9 @@ button {
   border-bottom: 2px solid var(--orange);
 }
 
-.orange-delete {
+.delete-btn {
   color: var(--big-headline-color);
+  cursor: pointer;
 }
 
 .description-total {
