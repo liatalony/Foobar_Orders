@@ -102,8 +102,6 @@ function slideLeft() {
   }
 }
 
-<<<<<<< HEAD
-=======
 const beerCart = []; // Array to save all the ordered beers
 const beerInfo = {
   //the object for each type of ordered beer
@@ -113,7 +111,6 @@ const beerInfo = {
   price: 35,
 };
 
->>>>>>> vikisBranch
 function makeBeer(beer) {
   // Beer is TAP!!
   // append all the beers on tap in the html with the right data
@@ -125,7 +122,6 @@ function makeBeer(beer) {
 
   templateCopy.querySelector(".beer-name").textContent = beer.beer; //beer name
   templateCopy.querySelector(".storage span").textContent = beer.level / 50 + " "; // number of beer cups left
-<<<<<<< HEAD
   beerLogo.src = `beer-logos/${beer.beer.replace(/\s/g, "").toLowerCase()}.png`; //beer img src
 
   inputField.addEventListener("input", (event) => {
@@ -158,7 +154,6 @@ function makeBeer(beer) {
       updateCart();
     }
   });
-=======
   const beerLogo = templateCopy.querySelector(".beer-logo"); // beer img
   beerLogo.src = `static/beer-logos/${beer.beer.replace(/\s/g, "").toLowerCase()}.png`; //beer img src
 
@@ -166,7 +161,6 @@ function makeBeer(beer) {
   inputField.id = `tap-${beer.id}-amount-input`; //generate id for tap input field
   const plus = templateCopy.querySelector(".more"); // plus button
   const minus = templateCopy.querySelector(".less"); // minus button
->>>>>>> vikisBranch
 
   plus.addEventListener("click", function (event) {
     // add beer to cart by clicking plus
