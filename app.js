@@ -35,6 +35,7 @@ function init() {
   });
   setTimeout(() => {
     document.querySelector("header").classList.remove("hidden");
+    document.querySelector("main").style.paddingTop = "50px";
     slideRight();
   }, 6000);
 }
@@ -43,6 +44,8 @@ const cart = document.querySelector(".cart"); //cart button
 let numOfOrders = document.querySelector(".number-of-orders"); // number of orders in the cart
 const goToPayment = document.querySelector(".proceed"); // procceed button in "your order" page
 const prev = document.querySelectorAll(".previous"); // back arrows to slide back
+const buyMore = document.querySelector(".moreBeer");
+buyMore.addEventListener("click", slideLeft);
 
 cart.addEventListener("click", slideRight);
 
@@ -92,12 +95,20 @@ function slideRight() {
 }
 
 function slideLeft() {
-  counter--;
-  document.querySelector("main").style.transform = "translateX(" + -100 * counter + "vw)"; //move to this point
-  if (counter == 1) {
-    document.querySelector(".go-to-cart").style.opacity = "1";
+  console.log(counter);
+
+  if (counter === 4) {
+    counter = 1;
+    document.querySelector("main").style.transform = "translateX(" + -100 * counter + "vw)"; //move to this point
     cart.addEventListener("click", slideRight);
-    document.querySelector(".go-to-cart").disabled = false;
+    document.querySelector(".go-to-cart").style.opacity = "1";
+  } else {
+    counter--;
+    document.querySelector("main").style.transform = "translateX(" + -100 * counter + "vw)"; //move to this point
+    if (counter == 1) {
+      document.querySelector(".go-to-cart").style.opacity = "1";
+      cart.addEventListener("click", slideRight);
+    }
   }
 }
 
@@ -360,8 +371,11 @@ function displayCart(beer) {
 
 // ---------------- <POST> ------------------------
 
-const btn = document.querySelector(".filter.light");
-btn.addEventListener("click", sendOrder);
+const mobilepay = document.querySelector(".mobilepay");
+mobilepay.addEventListener("click", () => {
+  sendOrder();
+  slideRight();
+});
 
 function sendOrder() {
   console.log("sending...");
