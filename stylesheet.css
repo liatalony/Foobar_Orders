@@ -173,31 +173,6 @@ button.cart {
   border-radius: 25px;
 }
 
-.filters {
-  padding-top: 20px;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-}
-
-.filters button {
-  width: 25%;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  border-radius: 25px;
-  border: solid 3px var(--button-border);
-  background-color: var(--button-color);
-  color: var(--text-color);
-}
-
-.filters .filter-active {
-  background-color: var(--button-border);
-  color: var(--selected);
-  font-weight: bold;
-}
-
 .beer {
   background-color: var(--opacity-color);
   border: var(--opacity-border);
@@ -305,13 +280,19 @@ button {
 .description-title {
   display: flex;
   justify-content: space-between;
-  margin: 30px 20px 5px 20px;
-  padding-bottom: 10px;
+  margin: 30px 20px 15px 20px;
+  padding-bottom: 5px;
   border-bottom: 2px solid var(--orange);
 }
 
-.orange-delete {
+#drinks-title {
+  color: var(--read-more-color);
+  font-size: var(--big-headline-size);
+}
+
+.delete-btn {
   color: var(--big-headline-color);
+  cursor: pointer;
 }
 
 .description-total {

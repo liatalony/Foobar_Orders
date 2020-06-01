@@ -345,6 +345,16 @@ function displayCart(beer) {
       updateCart(); // update the number shown on the cart
     }
   });
+
+  const deleteBtn = templateOrderCopy.querySelector(".delete-btn");
+  deleteBtn.addEventListener("click", function () {
+    beerCart.splice(
+      beerCart.findIndex((x) => x.tapId == beer.tapId),
+      1
+    );
+    updateCart();
+    document.querySelector(`#tap-${beer.tapId}-amount-input`).value = 0;
+  });
   document.querySelector(".items").appendChild(templateOrderCopy);
 }
 
