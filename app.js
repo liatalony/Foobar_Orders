@@ -94,7 +94,7 @@ function slideRight() {
 function slideLeft() {
   counter--;
   document.querySelector("main").style.transform = "translateX(" + -100 * counter + "vw)"; //move to this point
-  if (counter == 0) {
+  if (counter == 1) {
     document.querySelector(".go-to-cart").style.opacity = "1";
     cart.addEventListener("click", slideRight);
     document.querySelector(".go-to-cart").disabled = false;
