@@ -171,9 +171,6 @@ button.cart {
   border-radius: 25px;
 }
 
-.drinks-menu {
-}
-
 .beer {
   background-color: var(--opacity-color);
   border: var(--opacity-border);
