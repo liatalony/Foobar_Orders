@@ -132,7 +132,11 @@ function makeBeer(beer) {
   inputField.id = `tap-${beer.id}-amount-input`; //generate id for tap input field
 
   templateCopy.querySelector(".beer-name").textContent = beer.beer; //beer name
-  templateCopy.querySelector(".storage span").textContent = beer.level / 50 + " "; // number of beer cups left
+  if (beer.level == 0) {
+    templateCopy.querySelector(".storage").textContent = "Replacing Keg";
+  } else {
+    templateCopy.querySelector(".storage span").textContent = beer.level / 50 + " "; // number of beer cups left
+  }
   beerLogo.src = `beer-logos/${beer.beer.replace(/\s/g, "").toLowerCase()}.png`; //beer img src
 
   inputField.addEventListener("input", (event) => {
