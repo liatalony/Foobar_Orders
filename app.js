@@ -289,6 +289,15 @@ function updateCart() {
 
   console.log(beerCart);
   document.querySelector(".items").innerHTML = "";
+  if (beerCart.length == 0) {
+    const emptyCart = document.createElement("h3");
+    emptyCart.classList.add("emptyCart");
+    emptyCart.textContent = "Your cart is empty";
+    goToPayment.removeEventListener("click", slideRight);
+    document.querySelector(".items").append(emptyCart);
+  } else {
+    goToPayment.addEventListener("click", slideRight);
+  }
   beerCart.forEach((x) => displayCart(x));
 }
 //Make the Your Order Page dynamic - Viki

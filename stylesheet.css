@@ -244,6 +244,7 @@ button {
   border-radius: 25px;
   color: var(--blue);
   font-weight: bold;
+  cursor: pointer;
 }
 
 .read-more-btn {
@@ -255,6 +256,7 @@ button {
 }
 
 .previous {
+  cursor: pointer;
   margin-left: 10px;
   font-size: var(--big-headline-size);
 }
@@ -283,6 +285,11 @@ button {
   margin: 30px 20px 15px 20px;
   padding-bottom: 5px;
   border-bottom: 2px solid var(--orange);
+}
+
+.emptyCart {
+  font-weight: bold;
+  text-align: center;
 }
 
 #drinks-title {
@@ -552,3 +559,18 @@ label .field.is-focused + span {
   margin-right: auto;
 }
 /*---------------- </RECIPT> ----------------*/
+
+@media all and (min-width: 700px) {
+  .beer {
+    grid-template-columns: 12% 1fr max-content;
+  }
+
+  .beers {
+    columns: 2;
+    padding: 30px;
+  }
+
+  .input-add {
+    text-align: center;
+  }
+}
