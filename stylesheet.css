@@ -562,7 +562,7 @@ label .field.is-focused + span {
 
 @media all and (min-width: 700px) {
   .beer {
-    grid-template-columns: 12% 1fr max-content;
+    grid-template-columns: 80px 1fr max-content;
   }
 
   .beers {
@@ -572,5 +572,10 @@ label .field.is-focused + span {
 
   .input-add {
     text-align: center;
+  }
+
+  .modal-img {
+    max-width: 200px;
+    padding-bottom: 10px;
   }
 }
