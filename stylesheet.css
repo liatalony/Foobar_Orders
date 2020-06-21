@@ -58,10 +58,6 @@ body {
   background-position: center;
 }
 
-.hidden {
-  display: none;
-}
-
 main {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -183,6 +179,8 @@ button.cart {
   display: grid;
   grid-template-columns: 25% 1fr 1fr;
   margin-bottom: 10px;
+  opacity: 0;
+  animation: fade 0.5s ease-out forwards;
 }
 
 .beer-name {
@@ -361,6 +359,7 @@ button {
 .mobilepay-container h2 {
   margin-bottom: 10px;
 }
+
 form {
   width: 300px;
   margin: 20px auto;
@@ -557,6 +556,126 @@ label .field.is-focused + span {
 .recipt button {
   margin-left: auto;
   margin-right: auto;
+}
+
+/*---------- <EXTRA>------------*/
+/*---------- <MODAL>------------*/
+.modal-animation-open {
+  animation: fade 0.3s ease-in-out forwards;
+}
+.modal-animation-close {
+  animation: fade-out 0.3s ease-in-out forwards;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(300px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(300px);
+  }
+}
+
+/*---------- </MODAL>------------*/
+
+/*---------- <DELETE>------------*/
+.delete-animation {
+  animation: delete 0.3s ease-in forwards;
+}
+
+@keyframes delete {
+  to {
+    transform: translateX(-100vw);
+  }
+}
+/*---------- </DELETE>------------*/
+
+/*---------- <SVG>------------*/
+.svg path {
+  stroke-dasharray: 3500;
+  stroke-dashoffset: -4000;
+  animation: stroke 1s linear forwards;
+}
+
+.svg {
+  width: 15px;
+  scale: 2.5;
+}
+
+@keyframes stroke {
+  to {
+    stroke-dashoffset: 2750;
+    stroke: green;
+  }
+}
+/*---------- </SVG>------------*/
+
+/*---------- <NOTIFICATION>------------*/
+.notification {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  margin-left: -47.5%;
+  height: 80px;
+  z-index: 100;
+  width: 95%;
+  background-color: var(--selected);
+  border: solid 3px var(--button-border);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: var(--beer-headline-size);
+  animation: down 0.5s linear forwards;
+}
+
+.notifNum {
+  font-size: var(--text-size);
+}
+.display-notification {
+  animation: down 0.5s linear forwards;
+}
+
+.remove-notification {
+  animation: up 0.5s linear forwards;
+}
+
+@keyframes down {
+  from {
+    transform: translateY(-120px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-120px);
+  }
+}
+/*---------- </NOTIFICATION>------------*/
+
+/*---------- </EXTRA>------------*/
+
+.hidden {
+  display: none;
 }
 /*---------------- </RECIPT> ----------------*/
 

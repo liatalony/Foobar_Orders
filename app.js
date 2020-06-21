@@ -16,7 +16,9 @@ function init() {
     .then((res) => res.json())
     .then((e) => {
       console.log(e.taps);
-      e.taps.forEach(makeBeer); //only sending th tap list
+      setTimeout(() => {
+        e.taps.forEach(makeBeer); //only sending th tap list
+      }, 6000);
     });
   fetch("https://foobar-squad.herokuapp.com/beertypes")
     .then((res) => res.json())
@@ -40,11 +42,13 @@ function init() {
   }, 6000);
 }
 
+let animationDelay = 0;
 const cart = document.querySelector(".cart"); //cart button
 let numOfOrders = document.querySelector(".number-of-orders"); // number of orders in the cart
 const goToPayment = document.querySelector(".proceed"); // procceed button in "your order" page
 const prev = document.querySelectorAll(".previous"); // back arrows to slide back
 const buyMore = document.querySelector(".moreBeer");
+
 buyMore.addEventListener("click", slideLeft);
 
 cart.addEventListener("click", slideRight);
@@ -251,13 +255,23 @@ function makeBeer(beer) {
     body.classList.add("modalopen");
     const exit = document.querySelector(".exit");
     exit.addEventListener("click", function () {
-      modal.style.display = "none";
-      body.classList.remove("modalopen");
-      element.classList.remove(...element.classList);
-      element.classList.add("modalcontainer");
+      document.querySelector(".modal").classList.add("modal-animation-close");
+      setTimeout(() => {
+        modal.style.display = "none";
+        body.classList.remove("modalopen");
+        element.classList.remove(...element.classList);
+        element.classList.add("modalcontainer");
+        document.querySelector(".modal").classList.remove("modal-animation-close");
+        document.querySelector(".modal").classList.remove("modal-animation-open");
+      }, 300);
     });
+    document.querySelector(".modal").classList.add("modal-animation-open");
   });
-  document.querySelector(".beers").appendChild(templateCopy); // append the beer information in the HTML
+  setTimeout(() => {
+    document.querySelector(".beers").appendChild(templateCopy); // append the beer information in the HTML
+  }, animationDelay);
+
+  animationDelay += 200;
 }
 
 function updateCart() {
@@ -305,6 +319,8 @@ function updateCart() {
 function displayCart(beer) {
   const templateOrderCopy = document.querySelector(".your-order-template").content.cloneNode(true); // copying the template
   templateOrderCopy.querySelector(".your-beer").textContent = beer.name; //beer name
+  const section = templateOrderCopy.querySelector(".section");
+  console.log(section);
 
   const inputField = templateOrderCopy.querySelector(".amount-of-beer"); // number of beer
   inputField.value = beer.amount;
@@ -371,14 +387,22 @@ function displayCart(beer) {
   });
 
   const deleteBtn = templateOrderCopy.querySelector(".delete-btn");
-  deleteBtn.addEventListener("click", function () {
-    beerCart.splice(
-      beerCart.findIndex((x) => x.tapId == beer.tapId),
-      1
-    );
-    updateCart();
-    document.querySelector(`#tap-${beer.tapId}-amount-input`).value = 0;
-  });
+  deleteBtn.addEventListener("click", deleteFromCart);
+
+  function deleteFromCart() {
+    console.log(section);
+
+    //EXTRA
+    section.classList.add("delete-animation"); //added an animation when deleting an object from the cart
+    setTimeout(() => {
+      beerCart.splice(
+        beerCart.findIndex((x) => x.tapId == beer.tapId),
+        1
+      );
+      updateCart();
+      document.querySelector(`#tap-${beer.tapId}-amount-input`).value = 0;
+    }, 400);
+  }
   document.querySelector(".items").appendChild(templateOrderCopy);
 }
 
@@ -413,6 +437,7 @@ function sendOrder() {
       beerCart.splice(0, beerCart.length);
       console.log(beerCart);
       updateCart();
+      checkStatus(data.id);
     });
 }
 
@@ -475,8 +500,17 @@ function setOutcome(result) {
     // Use the token to create a charge or a customer
     // https://stripe.com/docs/payments/charges-api
 
-    sendOrder();
-    slideRight();
+    //EXTRA
+    fetch("SVG FooBar/check-mark.svg") // replace "Pay" with an animated svg
+      .then((e) => e.text())
+      .then((checkMark) => {
+        document.querySelector(".payBtn").innerHTML = checkMark;
+        setTimeout(() => {
+          sendOrder();
+          slideRight();
+          document.querySelector(".payBtn").textContent = "Pay";
+        }, 2000);
+      });
   } else if (result.error) {
     errorElement.textContent = result.error.message;
     errorElement.classList.add("visible");
@@ -495,3 +529,41 @@ document.querySelector("form").addEventListener("submit", function (e) {
   };
   stripe.createToken(card, extraDetails).then(setOutcome);
 });
+
+// ------------- <NOTIFICATION> ------------------------//
+//EXTRA
+const notification = document.querySelector(".notification");
+
+function checkStatus(id) {
+  let statusCheck = setInterval(() => {
+    fetch("https://foobar-squad.herokuapp.com") //fetching all the bar info
+      .then((res) => res.json())
+      .then((e) => {
+        e.serving.forEach((customer) => {
+          if (customer.id === id) {
+            console.log("its there");
+
+            notification.classList.remove("hidden");
+            document.querySelector(".notifNum span").textContent = id;
+            notification.classList.remove("remove-notification");
+            notification.classList.add("display-notification");
+            window.navigator.vibrate(2000);
+            return;
+          } else {
+            console.log("no");
+          }
+        });
+      });
+  }, 5000);
+  notification.addEventListener("click", () => {
+    window.navigator.vibrate(0);
+    clearInterval(statusCheck);
+    notification.classList.remove("display-notification");
+    notification.classList.add("remove-notification");
+    setTimeout(() => {
+      notification.classList.remove("hidden");
+    }, 600);
+  });
+}
+
+// ------------- </NOTIFICATION> ------------------------//
